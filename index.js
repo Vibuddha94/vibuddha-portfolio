@@ -108,32 +108,20 @@ function initializeCursor() {
 // Mobile menu toggle
 function initializeMobileMenu() {
   const mobileMenuBtn = document.querySelector(".md\\:hidden");
-  const nav = document.querySelector("nav");
   let mobileMenuOpen = false;
 
   if (mobileMenuBtn) {
     mobileMenuBtn.addEventListener("click", () => {
       mobileMenuOpen = !mobileMenuOpen;
+      const mobileMenu = document.getElementById("mobile-menu");
 
       if (mobileMenuOpen) {
-        // Create mobile menu
-        const mobileMenu = document.createElement("div");
-        mobileMenu.className =
-          "md:hidden absolute top-full left-0 right-0 glass-effect p-6 space-y-4";
-        mobileMenu.innerHTML = `
-                    <a href="#home" class="block text-center py-2 hover:text-purple-400 transition-colors">Home</a>
-                    <a href="#about" class="block text-center py-2 hover:text-purple-400 transition-colors">About</a>
-                    <a href="#projects" class="block text-center py-2 hover:text-purple-400 transition-colors">Projects</a>
-                    <a href="#contact" class="block text-center py-2 hover:text-purple-400 transition-colors">Contact</a>
-                `;
-        nav.appendChild(mobileMenu);
+        // Toggle mobile menu visibility
+        mobileMenu.classList.remove("hidden");
         mobileMenuBtn.innerHTML = "✕";
       } else {
-        // Remove mobile menu
-        const mobileMenu = nav.querySelector(".md\\:hidden:not(button)");
-        if (mobileMenu) {
-          mobileMenu.remove();
-        }
+        // Hide mobile menu
+        mobileMenu.classList.add("hidden");
         mobileMenuBtn.innerHTML = "☰";
       }
     });

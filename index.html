@@ -12,60 +12,71 @@
 <body class="bg-gray-900 text-white overflow-x-hidden">
     <!-- Navigation -->
     <nav class="fixed top-0 left-0 right-0 z-50 glass-effect">
-        <div class="container mx-auto px-6 py-4">
+        <div class="container mx-auto px-4 sm:px-6 py-4">
             <div class="flex justify-between items-center">
                 <div
-                    class="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                    class="text-xl sm:text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
                     BKDVibuddha
                 </div>
-                <div class="hidden md:flex space-x-8">
-                    <a href="#home" class="nav-item hover:text-purple-400">Home</a>
-                    <a href="#about" class="nav-item hover:text-purple-400">About</a>
-                    <a href="#projects" class="nav-item hover:text-purple-400">Projects</a>
-                    <a href="#contact" class="nav-item hover:text-purple-400">Contact</a>
+                <div class="hidden md:flex space-x-6 lg:space-x-8">
+                    <a href="#home" class="nav-item hover:text-purple-400 text-sm lg:text-base">Home</a>
+                    <a href="#about" class="nav-item hover:text-purple-400 text-sm lg:text-base">About</a>
+                    <a href="#projects" class="nav-item hover:text-purple-400 text-sm lg:text-base">Projects</a>
+                    <a href="#contact" class="nav-item hover:text-purple-400 text-sm lg:text-base">Contact</a>
                 </div>
-                <button class="md:hidden text-white">☰</button>
+                <button class="md:hidden text-white text-xl" id="mobile-menu-btn">☰</button>
+            </div>
+            <!-- Mobile Menu -->
+            <div class="mt-4 pb-4 hidden" id="mobile-menu">
+                <div class="flex flex-col space-y-3">
+                    <a href="#home" class="nav-item hover:text-purple-400 py-2">Home</a>
+                    <a href="#about" class="nav-item hover:text-purple-400 py-2">About</a>
+                    <a href="#projects" class="nav-item hover:text-purple-400 py-2">Projects</a>
+                    <a href="#contact" class="nav-item hover:text-purple-400 py-2">Contact</a>
+                </div>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="min-h-screen flex items-center justify-center relative overflow-hidden">
+    <section id="home" class="min-h-screen flex items-center justify-center relative overflow-hidden pt-16 sm:pt-0">
         <div class="absolute inset-0 animate-gradient opacity-20"></div>
         <div class="absolute inset-0 bg-gray-900 bg-opacity-80"></div>
 
-        <!-- Floating Elements -->
-        <div class="absolute top-20 left-20 w-20 h-20 bg-purple-500 rounded-full opacity-20 animate-float"></div>
-        <div class="absolute bottom-20 right-20 w-32 h-32 bg-pink-500 rounded-full opacity-15 animate-float"
-            style="animation-delay: -2s;"></div>
-        <div class="absolute top-1/2 left-10 w-16 h-16 bg-blue-500 rounded-full opacity-25 animate-float"
-            style="animation-delay: -4s;"></div>
+        <!-- Floating Elements - Constrained positioning -->
+        <div class="absolute top-20 left-4 sm:left-20 w-12 h-12 sm:w-20 sm:h-20 bg-purple-500 rounded-full opacity-20 animate-float"
+            style="max-width: calc(100vw - 2rem);"></div>
+        <div class="absolute bottom-20 right-4 sm:right-20 w-20 h-20 sm:w-32 sm:h-32 bg-pink-500 rounded-full opacity-15 animate-float"
+            style="animation-delay: -2s; max-width: calc(100vw - 2rem);"></div>
+        <div class="absolute top-1/2 left-2 sm:left-10 w-10 h-10 sm:w-16 sm:h-16 bg-blue-500 rounded-full opacity-25 animate-float"
+            style="animation-delay: -4s; max-width: calc(100vw - 1rem);"></div>
 
-        <div class="container mx-auto px-6 text-center relative z-10">
+        <div class="container mx-auto px-4 sm:px-6 text-center relative z-10">
             <div class="animate-fade-in-up">
                 <h1
-                    class="text-6xl md:text-8xl font-bold mb-6 bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">
+                    class="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent leading-tight">
                     Vibuddha Vidarshana
                 </h1>
-                <p class="text-xl md:text-2xl mb-8 text-gray-300 animate-slide-in-left" style="animation-delay: 0.2s;">
+                <p class="text-lg sm:text-xl md:text-2xl mb-6 sm:mb-8 text-gray-300 animate-slide-in-left"
+                    style="animation-delay: 0.2s;">
                     Full Stack Developer
                 </p>
-                <p class="text-lg mb-12 text-gray-400 max-w-2xl mx-auto animate-slide-in-right"
+                <p class="text-base sm:text-lg mb-8 sm:mb-12 text-gray-400 max-w-xs sm:max-w-2xl mx-auto animate-slide-in-right px-2"
                     style="animation-delay: 0.4s;">
                     Crafting beautiful and functional web experiences with a focus on performance and user
                     engagement. Passionate about modern web technologies and creating seamless digital journeys.
                 </p>
-                <div class="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up"
+                <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center animate-fade-in-up max-w-md sm:max-w-none mx-auto"
                     style="animation-delay: 0.6s;">
-                    <a href="#projects" class="nav-item ">
+                    <a href="#projects" class="nav-item">
                         <button
-                            class="px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full font-semibold hover:scale-105 transition-transform duration-300 animate-pulse-glow">
+                            class="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full font-semibold hover:scale-105 transition-transform duration-300 animate-pulse-glow text-sm sm:text-base">
                             View My Work
                         </button>
                     </a>
                     <a href="#contact" class="nav-item">
                         <button
-                            class="px-8 py-4 border border-purple-500 rounded-full font-semibold hover:bg-purple-500 hover:scale-105 transition-all duration-300">
+                            class="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 border border-purple-500 rounded-full font-semibold hover:bg-purple-500 hover:scale-105 transition-all duration-300 text-sm sm:text-base">
                             Get In Touch
                         </button>
                     </a>
@@ -75,72 +86,72 @@
     </section>
 
     <!-- About Section -->
-    <section id="about" class="py-20 bg-gray-800">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-16">
+    <section id="about" class="py-12 sm:py-16 lg:py-20 bg-gray-800">
+        <div class="container mx-auto px-4 sm:px-6">
+            <div class="text-center mb-12 sm:mb-16">
                 <h2
-                    class="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                    class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
                     About Me
                 </h2>
-                <div class="w-24 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto"></div>
+                <div class="w-16 sm:w-24 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto"></div>
             </div>
 
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div class="animate-slide-in-left">
-                    <div class="relative">
-                        <div class="w-80 h-80 mx-auto bg-gradient-to-br from-purple-500 to-pink-500 rounded-full p-1">
-                            <div
-                                class="w-full h-full bg-gray-900 rounded-full flex items-center justify-center text-6xl">
+            <div class="grid lg:grid-cols-2 gap-8 sm:gap-12 items-center">
+                <div class="animate-slide-in-left order-2 lg:order-1">
+                    <div class="relative flex justify-center w-full">
+                        <div
+                            class="w-64 h-64 sm:w-80 sm:h-80 max-w-full bg-gradient-to-br from-purple-500 to-pink-500 rounded-full p-1">
+                            <div class="w-full h-full bg-gray-900 rounded-full flex items-center justify-center">
                                 <img src="./assets/profilepic.jpg" alt="Profile Picture"
-                                    class="w-72 h-72 rounded-full object-cover shadow-lg">
+                                    class="w-56 h-56 sm:w-72 sm:h-72 max-w-full rounded-full object-cover shadow-lg">
                             </div>
                         </div>
                         <div
-                            class="absolute -top-4 -right-4 w-16 h-16 bg-yellow-400 rounded-full flex items-center justify-center text-2xl animate-bounce">
+                            class="absolute -top-2 -right-2 sm:-top-4 sm:-right-4 w-12 h-12 sm:w-16 sm:h-16 bg-yellow-400 rounded-full flex items-center justify-center text-lg sm:text-2xl animate-bounce">
                             ⚡
                         </div>
                     </div>
                 </div>
 
-                <div class="animate-slide-in-right">
-                    <h3 class="text-2xl font-bold mb-6 text-purple-400">Full Stack Developer</h3>
-                    <p class="text-gray-300 mb-6 leading-relaxed">
+                <div class="animate-slide-in-right order-1 lg:order-2">
+                    <h3 class="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-purple-400">Full Stack Developer</h3>
+                    <p class="text-gray-300 mb-4 sm:mb-6 leading-relaxed text-sm sm:text-base">
                         Hi, I'm Vibuddha Vidarshana, a passionate full stack developer with a love for creating
-                        immersive web
-                        experiences. With over 1 year of experience in the industry, I specialize in building
+                        immersive web experiences. With over 1 year of experience in the industry, I specialize in
+                        building
                         responsive and interactive applications using modern technologies like React, TypeScript, and
                         Node.js. I also have experience building robust backends using Spring Boot, enabling scalable
                         and secure APIs for modern web applications.
                     </p>
-                    <p class="text-gray-300 mb-8 leading-relaxed">
+                    <p class="text-gray-300 mb-6 sm:mb-8 leading-relaxed text-sm sm:text-base">
                         When I'm not coding, you'll find me exploring new technologies, contributing to open-source
                         projects, or experimenting with digital art and animation.
                     </p>
 
                     <!-- Skills -->
-                    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
                         <div
-                            class="skill-item bg-gradient-to-br from-orange-500 to-red-500 p-4 rounded-lg text-center font-semibold">
+                            class="skill-item bg-gradient-to-br from-orange-500 to-red-500 p-3 sm:p-4 rounded-lg text-center font-semibold text-sm sm:text-base">
                             Spring Boot
                         </div>
                         <div
-                            class="skill-item bg-gradient-to-br from-blue-500 to-purple-500 p-4 rounded-lg text-center font-semibold">
+                            class="skill-item bg-gradient-to-br from-blue-500 to-purple-500 p-3 sm:p-4 rounded-lg text-center font-semibold text-sm sm:text-base">
                             React
                         </div>
                         <div
-                            class="skill-item bg-gradient-to-br from-green-500 to-teal-500 p-4 rounded-lg text-center font-semibold">
+                            class="skill-item bg-gradient-to-br from-green-500 to-teal-500 p-3 sm:p-4 rounded-lg text-center font-semibold text-sm sm:text-base">
                             Java
                         </div>
                         <div
-                            class="skill-item bg-gradient-to-br from-pink-500 to-purple-500 p-4 rounded-lg text-center font-semibold">
+                            class="skill-item bg-gradient-to-br from-pink-500 to-purple-500 p-3 sm:p-4 rounded-lg text-center font-semibold text-sm sm:text-base">
                             JavaScript
                         </div>
                         <div
-                            class="skill-item bg-gradient-to-br from-yellow-500 to-orange-500 p-4 rounded-lg text-center font-semibold">
+                            class="skill-item bg-gradient-to-br from-yellow-500 to-orange-500 p-3 sm:p-4 rounded-lg text-center font-semibold text-sm sm:text-base">
                             Tailwind CSS
                         </div>
                         <div
-                            class="skill-item bg-gradient-to-br from-indigo-500 to-blue-500 p-4 rounded-lg text-center font-semibold">
+                            class="skill-item bg-gradient-to-br from-indigo-500 to-blue-500 p-3 sm:p-4 rounded-lg text-center font-semibold text-sm sm:text-base">
                             Node.js
                         </div>
                     </div>
@@ -150,82 +161,81 @@
     </section>
 
     <!-- Projects Section -->
-    <section id="projects" class="py-20 bg-gray-900">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-16">
+    <section id="projects" class="py-12 sm:py-16 lg:py-20 bg-gray-900">
+        <div class="container mx-auto px-4 sm:px-6">
+            <div class="text-center mb-12 sm:mb-16">
                 <h2
-                    class="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                    class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
                     Featured Projects
                 </h2>
-                <div class="w-24 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto"></div>
+                <div class="w-16 sm:w-24 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto"></div>
             </div>
 
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
                 <!-- Project 1 -->
-                <div class="project-card glass-effect rounded-2xl p-6 hover:shadow-2xl">
+                <div class="project-card glass-effect rounded-2xl p-4 sm:p-6 hover:shadow-2xl">
                     <div
-                        class="w-full h-48 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl mb-6 flex items-center justify-center text-4xl">
-                        <img class="h-40" src="./assets/project1.svg" alt="project1.Picture">
+                        class="w-full h-36 sm:h-48 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl mb-4 sm:mb-6 flex items-center justify-center">
+                        <img class="h-28 sm:h-40" src="./assets/project1.svg" alt="project1.Picture">
                     </div>
-                    <h3 class="text-xl font-bold mb-3 text-blue-400">Nexivus - Spring Boot</h3>
-                    <p class="text-gray-300 mb-4">
+                    <h3 class="text-lg sm:text-xl font-bold mb-2 sm:mb-3 text-blue-400">Nexivus - Spring Boot</h3>
+                    <p class="text-gray-300 mb-3 sm:mb-4 text-sm sm:text-base">
                         A comprehensive point of sale system built with Spring Boot featuring JWT authentication
-                        and RESTful
-                        APIs.
+                        and RESTful APIs.
                     </p>
-                    <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="px-3 py-1 bg-orange-600 rounded-full text-sm">Spring Boot</span>
-                        <span class="px-3 py-1 bg-green-600 rounded-full text-sm">MySQL</span>
-                        <span class="px-3 py-1 bg-purple-600 rounded-full text-sm">JWT</span>
-                        <span class="px-3 py-1 bg-blue-600 rounded-full text-sm">REST API</span>
+                    <div class="flex flex-wrap gap-1 sm:gap-2 mb-3 sm:mb-4">
+                        <span class="px-2 sm:px-3 py-1 bg-orange-600 rounded-full text-xs sm:text-sm">Spring Boot</span>
+                        <span class="px-2 sm:px-3 py-1 bg-green-600 rounded-full text-xs sm:text-sm">MySQL</span>
+                        <span class="px-2 sm:px-3 py-1 bg-purple-600 rounded-full text-xs sm:text-sm">JWT</span>
+                        <span class="px-2 sm:px-3 py-1 bg-blue-600 rounded-full text-xs sm:text-sm">REST API</span>
                     </div>
                     <a href="./project1.html">
                         <button
-                            class="w-full py-2 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg font-semibold hover:scale-105 transition-transform">
+                            class="w-full py-2 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg font-semibold hover:scale-105 transition-transform text-sm sm:text-base">
                             View Project
                         </button>
                     </a>
-
                 </div>
 
                 <!-- Project 2 -->
-                <div class="project-card glass-effect rounded-2xl p-6 hover:shadow-2xl">
+                <div class="project-card glass-effect rounded-2xl p-4 sm:p-6 hover:shadow-2xl">
                     <div
-                        class="w-full h-48 bg-gradient-to-br from-blue-500 to-teal-500 rounded-xl mb-6 flex items-center justify-center text-4xl">
+                        class="w-full h-36 sm:h-48 bg-gradient-to-br from-blue-500 to-teal-500 rounded-xl mb-4 sm:mb-6 flex items-center justify-center text-3xl sm:text-4xl">
                         📱
                     </div>
-                    <h3 class="text-xl font-bold mb-3 text-blue-400">Mobile Dashboard</h3>
-                    <p class="text-gray-300 mb-4">
+                    <h3 class="text-lg sm:text-xl font-bold mb-2 sm:mb-3 text-blue-400">Mobile Dashboard</h3>
+                    <p class="text-gray-300 mb-3 sm:mb-4 text-sm sm:text-base">
                         A responsive analytics dashboard with real-time data visualization and smooth animations.
                     </p>
-                    <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="px-3 py-1 bg-blue-600 rounded-full text-sm">React</span>
-                        <span class="px-3 py-1 bg-purple-600 rounded-full text-sm">D3.js</span>
-                        <span class="px-3 py-1 bg-pink-600 rounded-full text-sm">Framer Motion</span>
+                    <div class="flex flex-wrap gap-1 sm:gap-2 mb-3 sm:mb-4">
+                        <span class="px-2 sm:px-3 py-1 bg-blue-600 rounded-full text-xs sm:text-sm">React</span>
+                        <span class="px-2 sm:px-3 py-1 bg-purple-600 rounded-full text-xs sm:text-sm">D3.js</span>
+                        <span class="px-2 sm:px-3 py-1 bg-pink-600 rounded-full text-xs sm:text-sm">Framer Motion</span>
                     </div>
                     <button
-                        class="w-full py-2 bg-gradient-to-r from-blue-500 to-teal-500 rounded-lg font-semibold hover:scale-105 transition-transform">
+                        class="w-full py-2 bg-gradient-to-r from-blue-500 to-teal-500 rounded-lg font-semibold hover:scale-105 transition-transform text-sm sm:text-base">
                         View Project
                     </button>
                 </div>
 
                 <!-- Project 3 -->
-                <div class="project-card glass-effect rounded-2xl p-6 hover:shadow-2xl">
+                <div
+                    class="project-card glass-effect rounded-2xl p-4 sm:p-6 hover:shadow-2xl sm:col-span-2 lg:col-span-1">
                     <div
-                        class="w-full h-48 bg-gradient-to-br from-green-500 to-yellow-500 rounded-xl mb-6 flex items-center justify-center text-4xl">
+                        class="w-full h-36 sm:h-48 bg-gradient-to-br from-green-500 to-yellow-500 rounded-xl mb-4 sm:mb-6 flex items-center justify-center text-3xl sm:text-4xl">
                         🎨
                     </div>
-                    <h3 class="text-xl font-bold mb-3 text-green-400">Creative Studio</h3>
-                    <p class="text-gray-300 mb-4">
+                    <h3 class="text-lg sm:text-xl font-bold mb-2 sm:mb-3 text-green-400">Creative Studio</h3>
+                    <p class="text-gray-300 mb-3 sm:mb-4 text-sm sm:text-base">
                         A digital art platform featuring AI-powered tools and collaborative features.
                     </p>
-                    <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="px-3 py-1 bg-green-600 rounded-full text-sm">Next.js</span>
-                        <span class="px-3 py-1 bg-yellow-600 rounded-full text-sm">AI/ML</span>
-                        <span class="px-3 py-1 bg-red-600 rounded-full text-sm">Canvas API</span>
+                    <div class="flex flex-wrap gap-1 sm:gap-2 mb-3 sm:mb-4">
+                        <span class="px-2 sm:px-3 py-1 bg-green-600 rounded-full text-xs sm:text-sm">Next.js</span>
+                        <span class="px-2 sm:px-3 py-1 bg-yellow-600 rounded-full text-xs sm:text-sm">AI/ML</span>
+                        <span class="px-2 sm:px-3 py-1 bg-red-600 rounded-full text-xs sm:text-sm">Canvas API</span>
                     </div>
                     <button
-                        class="w-full py-2 bg-gradient-to-r from-green-500 to-yellow-500 rounded-lg font-semibold hover:scale-105 transition-transform">
+                        class="w-full py-2 bg-gradient-to-r from-green-500 to-yellow-500 rounded-lg font-semibold hover:scale-105 transition-transform text-sm sm:text-base">
                         View Project
                     </button>
                 </div>
@@ -234,72 +244,72 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-20 bg-gray-800">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-16">
+    <section id="contact" class="py-12 sm:py-16 lg:py-20 bg-gray-800">
+        <div class="container mx-auto px-4 sm:px-6">
+            <div class="text-center mb-12 sm:mb-16">
                 <h2
-                    class="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                    class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
                     Let's Connect
                 </h2>
-                <div class="w-24 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto mb-8"></div>
-                <p class="text-xl text-gray-300 max-w-2xl mx-auto">
+                <div class="w-16 sm:w-24 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto mb-6 sm:mb-8"></div>
+                <p class="text-lg sm:text-xl text-gray-300 max-w-2xl mx-auto px-4">
                     Ready to bring your ideas to life? Let's collaborate and create something amazing together.
                 </p>
             </div>
 
-            <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-12">
+            <div class="max-w-4xl mx-auto grid lg:grid-cols-2 gap-8 sm:gap-12">
                 <div class="animate-slide-in-left">
-                    <h3 class="text-2xl font-bold mb-6 text-purple-400">Get In Touch</h3>
-                    <div class="space-y-6">
-                        <div class="flex items-center space-x-4">
+                    <h3 class="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-purple-400">Get In Touch</h3>
+                    <div class="space-y-4 sm:space-y-6">
+                        <div class="flex items-center space-x-3 sm:space-x-4">
                             <div
-                                class="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
+                                class="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-lg sm:text-xl">
                                 📧
                             </div>
                             <div>
-                                <p class="font-semibold">Email</p>
-                                <p class="text-gray-400">alex@example.com</p>
+                                <p class="font-semibold text-sm sm:text-base">Email</p>
+                                <p class="text-gray-400 text-sm sm:text-base">alex@example.com</p>
                             </div>
                         </div>
-                        <div class="flex items-center space-x-4">
+                        <div class="flex items-center space-x-3 sm:space-x-4">
                             <div
-                                class="w-12 h-12 bg-gradient-to-br from-blue-500 to-teal-500 rounded-full flex items-center justify-center">
+                                class="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-blue-500 to-teal-500 rounded-full flex items-center justify-center text-lg sm:text-xl">
                                 🐦
                             </div>
                             <div>
-                                <p class="font-semibold">Twitter</p>
-                                <p class="text-gray-400">@alexchen_dev</p>
+                                <p class="font-semibold text-sm sm:text-base">Twitter</p>
+                                <p class="text-gray-400 text-sm sm:text-base">@alexchen_dev</p>
                             </div>
                         </div>
-                        <div class="flex items-center space-x-4">
+                        <div class="flex items-center space-x-3 sm:space-x-4">
                             <div
-                                class="w-12 h-12 bg-gradient-to-br from-gray-600 to-gray-800 rounded-full flex items-center justify-center">
+                                class="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-gray-600 to-gray-800 rounded-full flex items-center justify-center text-lg sm:text-xl">
                                 🔗
                             </div>
                             <div>
-                                <p class="font-semibold">LinkedIn</p>
-                                <p class="text-gray-400">linkedin.com/in/alexchen</p>
+                                <p class="font-semibold text-sm sm:text-base">LinkedIn</p>
+                                <p class="text-gray-400 text-sm sm:text-base break-all">linkedin.com/in/alexchen</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="animate-slide-in-right">
-                    <form class="space-y-6">
+                    <form class="space-y-4 sm:space-y-6">
                         <div>
                             <input type="text" placeholder="Your Name"
-                                class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:border-purple-500 transition-colors">
+                                class="w-full px-3 sm:px-4 py-2 sm:py-3 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:border-purple-500 transition-colors text-sm sm:text-base">
                         </div>
                         <div>
                             <input type="email" placeholder="Your Email"
-                                class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:border-purple-500 transition-colors">
+                                class="w-full px-3 sm:px-4 py-2 sm:py-3 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:border-purple-500 transition-colors text-sm sm:text-base">
                         </div>
                         <div>
-                            <textarea rows="5" placeholder="Your Message"
-                                class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:border-purple-500 transition-colors resize-none"></textarea>
+                            <textarea rows="4" placeholder="Your Message"
+                                class="w-full px-3 sm:px-4 py-2 sm:py-3 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:border-purple-500 transition-colors resize-none text-sm sm:text-base"></textarea>
                         </div>
                         <button type="submit"
-                            class="w-full py-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg font-semibold hover:scale-105 transition-transform duration-300 animate-pulse-glow">
+                            class="w-full py-2 sm:py-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg font-semibold hover:scale-105 transition-transform duration-300 animate-pulse-glow text-sm sm:text-base">
                             Send Message
                         </button>
                     </form>
@@ -309,9 +319,9 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 py-8 border-t border-gray-800">
-        <div class="container mx-auto px-6 text-center">
-            <p class="text-gray-400">
+    <footer class="bg-gray-900 py-6 sm:py-8 border-t border-gray-800">
+        <div class="container mx-auto px-4 sm:px-6 text-center">
+            <p class="text-gray-400 text-sm sm:text-base px-2">
                 © 2025 Vibuddha Vidarshana. All rights reserved. | Built with ❤️ using Tailwind CSS and JavaScript.
             </p>
         </div>
