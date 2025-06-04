@@ -1,0 +1,121 @@
+/* Custom CSS Animations and Styles */
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+}
+
+@keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 20px rgba(139, 92, 246, 0.3); }
+    50% { box-shadow: 0 0 40px rgba(139, 92, 246, 0.6); }
+}
+
+@keyframes slide-in-left {
+    0% { transform: translateX(-100px); opacity: 0; }
+    100% { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slide-in-right {
+    0% { transform: translateX(100px); opacity: 0; }
+    100% { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes fade-in-up {
+    0% { transform: translateY(30px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes gradient-shift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Animation Classes */
+.animate-float { 
+    animation: float 6s ease-in-out infinite; 
+}
+
+.animate-pulse-glow { 
+    animation: pulse-glow 2s ease-in-out infinite; 
+}
+
+.animate-slide-in-left { 
+    animation: slide-in-left 0.8s ease-out; 
+}
+
+.animate-slide-in-right { 
+    animation: slide-in-right 0.8s ease-out; 
+}
+
+.animate-fade-in-up { 
+    animation: fade-in-up 0.6s ease-out; 
+}
+
+.animate-gradient { 
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: gradient-shift 15s ease infinite;
+}
+
+/* Glass Effect */
+.glass-effect {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Interactive Elements */
+.project-card {
+    transition: all 0.3s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-10px) scale(1.02);
+}
+
+.skill-item {
+    transition: all 0.3s ease;
+}
+
+.skill-item:hover {
+    transform: scale(1.1);
+    filter: brightness(1.2);
+}
+
+/* Navigation Styles */
+.nav-item {
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.nav-item::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    transition: width 0.3s ease;
+}
+
+.nav-item:hover::after {
+    width: 100%;
+}
+
+/* Custom Cursor (when active) */
+.cursor {
+    transition: all 0.1s ease;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .animate-float {
+        animation-duration: 4s;
+    }
+    
+    .glass-effect {
+        backdrop-filter: blur(5px);
+    }
+}

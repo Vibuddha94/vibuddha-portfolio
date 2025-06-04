@@ -1,0 +1,134 @@
+<svg viewBox="0 0 400 240" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#6366f1;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="cardGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.1" />
+      <stop offset="100%" style="stop-color:#ffffff;stop-opacity:0.05" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="400" height="240" fill="url(#bgGradient)" rx="12"/>
+  
+  <!-- Floating particles/cubes -->
+  <g opacity="0.3">
+    <rect x="50" y="30" width="8" height="8" fill="#ffffff" rx="2" transform="rotate(45 54 34)">
+      <animateTransform attributeName="transform" type="rotate" values="45 54 34;405 54 34;45 54 34" dur="20s" repeatCount="indefinite"/>
+    </rect>
+    <rect x="320" y="60" width="6" height="6" fill="#ffffff" rx="1" transform="rotate(30 323 63)">
+      <animateTransform attributeName="transform" type="rotate" values="30 323 63;390 323 63;30 323 63" dur="15s" repeatCount="indefinite"/>
+    </rect>
+    <rect x="80" y="180" width="5" height="5" fill="#ffffff" rx="1" transform="rotate(60 82.5 182.5)">
+      <animateTransform attributeName="transform" type="rotate" values="60 82.5 182.5;420 82.5 182.5;60 82.5 182.5" dur="18s" repeatCount="indefinite"/>
+    </rect>
+  </g>
+  
+  <!-- Main dashboard mockup -->
+  <g transform="translate(60, 40)">
+    <!-- Main container -->
+    <rect width="280" height="160" fill="url(#cardGradient)" rx="8" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+    
+    <!-- Header bar -->
+    <rect x="0" y="0" width="280" height="32" fill="rgba(255,255,255,0.1)" rx="8"/>
+    <rect x="0" y="8" width="280" height="16" fill="rgba(255,255,255,0.05)" rx="0"/>
+    
+    <!-- Logo area -->
+    <rect x="12" y="8" width="16" height="16" fill="#60a5fa" rx="3" filter="url(#glow)"/>
+    <rect x="14" y="10" width="12" height="12" fill="none" stroke="#ffffff" stroke-width="1.5" rx="2"/>
+    <rect x="17" y="13" width="6" height="6" fill="#ffffff" rx="1"/>
+    
+    <!-- Menu items -->
+    <rect x="40" y="10" width="40" height="3" fill="rgba(255,255,255,0.7)" rx="1.5"/>
+    <rect x="88" y="10" width="35" height="3" fill="rgba(255,255,255,0.5)" rx="1.5"/>
+    <rect x="130" y="10" width="30" height="3" fill="rgba(255,255,255,0.5)" rx="1.5"/>
+    
+    <!-- Dashboard content -->
+    <!-- Stats cards -->
+    <g transform="translate(16, 48)">
+      <rect width="60" height="40" fill="rgba(255,255,255,0.1)" rx="4" stroke="rgba(255,255,255,0.1)"/>
+      <rect x="8" y="8" width="12" height="12" fill="#10b981" rx="2"/>
+      <rect x="8" y="24" width="35" height="2" fill="rgba(255,255,255,0.8)" rx="1"/>
+      <rect x="8" y="28" width="25" height="2" fill="rgba(255,255,255,0.5)" rx="1"/>
+    </g>
+    
+    <g transform="translate(84, 48)">
+      <rect width="60" height="40" fill="rgba(255,255,255,0.1)" rx="4" stroke="rgba(255,255,255,0.1)"/>
+      <rect x="8" y="8" width="12" height="12" fill="#f59e0b" rx="2"/>
+      <rect x="8" y="24" width="40" height="2" fill="rgba(255,255,255,0.8)" rx="1"/>
+      <rect x="8" y="28" width="30" height="2" fill="rgba(255,255,255,0.5)" rx="1"/>
+    </g>
+    
+    <g transform="translate(152, 48)">
+      <rect width="60" height="40" fill="rgba(255,255,255,0.1)" rx="4" stroke="rgba(255,255,255,0.1)"/>
+      <rect x="8" y="8" width="12" height="12" fill="#ef4444" rx="2"/>
+      <rect x="8" y="24" width="30" height="2" fill="rgba(255,255,255,0.8)" rx="1"/>
+      <rect x="8" y="28" width="35" height="2" fill="rgba(255,255,255,0.5)" rx="1"/>
+    </g>
+    
+    <!-- Main content area -->
+    <g transform="translate(16, 100)">
+      <rect width="248" height="45" fill="rgba(255,255,255,0.08)" rx="4" stroke="rgba(255,255,255,0.1)"/>
+      
+      <!-- Table header -->
+      <rect x="8" y="8" width="232" height="12" fill="rgba(255,255,255,0.1)" rx="2"/>
+      <rect x="12" y="10" width="25" height="2" fill="rgba(255,255,255,0.6)" rx="1"/>
+      <rect x="45" y="10" width="35" height="2" fill="rgba(255,255,255,0.6)" rx="1"/>
+      <rect x="90" y="10" width="25" height="2" fill="rgba(255,255,255,0.6)" rx="1"/>
+      <rect x="125" y="10" width="30" height="2" fill="rgba(255,255,255,0.6)" rx="1"/>
+      <rect x="165" y="10" width="20" height="2" fill="rgba(255,255,255,0.6)" rx="1"/>
+      <rect x="195" y="10" width="25" height="2" fill="rgba(255,255,255,0.6)" rx="1"/>
+      
+      <!-- Table rows -->
+      <rect x="12" y="25" width="20" height="2" fill="rgba(255,255,255,0.8)" rx="1"/>
+      <rect x="45" y="25" width="40" height="2" fill="rgba(255,255,255,0.8)" rx="1"/>
+      <rect x="90" y="25" width="30" height="2" fill="rgba(255,255,255,0.8)" rx="1"/>
+      <rect x="125" y="25" width="25" height="2" fill="rgba(255,255,255,0.8)" rx="1"/>
+      <rect x="165" y="25" width="15" height="2" fill="#10b981" rx="1"/>
+      <rect x="195" y="25" width="20" height="2" fill="rgba(255,255,255,0.8)" rx="1"/>
+      
+      <rect x="12" y="32" width="25" height="2" fill="rgba(255,255,255,0.6)" rx="1"/>
+      <rect x="45" y="32" width="35" height="2" fill="rgba(255,255,255,0.6)" rx="1"/>
+      <rect x="90" y="32" width="25" height="2" fill="rgba(255,255,255,0.6)" rx="1"/>
+      <rect x="125" y="32" width="30" height="2" fill="rgba(255,255,255,0.6)" rx="1"/>
+      <rect x="165" y="32" width="15" height="2" fill="#f59e0b" rx="1"/>
+      <rect x="195" y="32" width="25" height="2" fill="rgba(255,255,255,0.6)" rx="1"/>
+    </g>
+  </g>
+  
+  <!-- JWT token visualization -->
+  <g transform="translate(20, 200)" opacity="0.6">
+    <rect width="80" height="20" fill="rgba(255,255,255,0.1)" rx="10" stroke="rgba(255,255,255,0.2)"/>
+    <circle cx="15" cy="10" r="4" fill="#10b981"/>
+    <rect x="25" y="8" width="30" height="2" fill="rgba(255,255,255,0.7)" rx="1"/>
+    <rect x="25" y="12" width="20" height="2" fill="rgba(255,255,255,0.5)" rx="1"/>
+    <text x="105" y="12" fill="rgba(255,255,255,0.8)" font-family="monospace" font-size="8">JWT Secured</text>
+  </g>
+  
+  <!-- API endpoint visualization -->
+  <g transform="translate(300, 200)" opacity="0.6">
+    <rect width="80" height="20" fill="rgba(255,255,255,0.1)" rx="10" stroke="rgba(255,255,255,0.2)"/>
+    <rect x="8" y="6" width="12" height="8" fill="none" stroke="#60a5fa" stroke-width="1" rx="2"/>
+    <circle cx="14" cy="10" r="2" fill="#60a5fa"/>
+    <rect x="25" y="8" width="35" height="2" fill="rgba(255,255,255,0.7)" rx="1"/>
+    <rect x="25" y="12" width="25" height="2" fill="rgba(255,255,255,0.5)" rx="1"/>
+    <text x="220" y="12" fill="rgba(255,255,255,0.8)" font-family="monospace" font-size="8">REST API</text>
+  </g>
+  
+  <!-- Nexivus logo/icon in center -->
+  <g transform="translate(190, 20)">
+    <rect width="20" height="20" fill="rgba(255,255,255,0.15)" rx="4" filter="url(#glow)"/>
+    <rect x="3" y="3" width="14" height="14" fill="none" stroke="#ffffff" stroke-width="1.5" rx="2"/>
+    <rect x="6" y="6" width="8" height="8" fill="#ffffff" rx="1" opacity="0.8"/>
+    <rect x="8" y="8" width="4" height="4" fill="#6366f1" rx="0.5"/>
+  </g>
+</svg>
