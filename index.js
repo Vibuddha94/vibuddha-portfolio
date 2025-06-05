@@ -133,21 +133,17 @@ function initializeContactForm() {
         })
         .then(
           () => {
-            setTimeout(() => {
-              submitBtn.textContent = originalText;
-              submitBtn.disabled = false;
-              showNotification("Message sent successfully!", "success");
-              form.reset();
-            }, 2000);
+            submitBtn.textContent = originalText;
+            submitBtn.disabled = false;
+            showNotification("Message sent successfully!", "success");
+            form.reset();
           },
           (error) => {
-            setTimeout(() => {
-              submitBtn.textContent = originalText;
-              submitBtn.disabled = false;
-              showNotification("Error sending message!", "error");
-              console.error("Error sending email:", error);
-              form.reset();
-            }, 2000);
+            submitBtn.textContent = originalText;
+            submitBtn.disabled = false;
+            showNotification("Error sending message!", "error");
+            console.error("Error sending email:", error);
+            form.reset();
           }
         );
     });
