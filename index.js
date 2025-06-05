@@ -86,6 +86,17 @@ function initializeMobileMenu() {
   }
 }
 
+// close mobile menu on link click
+document.querySelectorAll("#mobile-menu a").forEach((link) => {
+  link.addEventListener("click", () => {
+    const mobileMenu = document.getElementById("mobile-menu");
+    mobileMenu.classList.add("hidden");
+    const mobileMenuBtn = document.querySelector(".md\\:hidden");
+    mobileMenuBtn.innerHTML = "☰";
+    initializeMobileMenu(); // Reset state
+  });
+});
+
 // Form handling
 function initializeContactForm() {
   const form = document.querySelector("form");

@@ -255,6 +255,7 @@ function closeMobileMenu() {
   if (mobileMenu) {
     mobileMenu.classList.add("hidden");
     mobileMenu.classList.remove("flex");
+    initMobileMenu(); // Reset state
   }
 }
 
