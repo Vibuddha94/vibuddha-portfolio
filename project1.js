@@ -679,7 +679,7 @@ function showModal(title, content) {
   // Create modal overlay
   const overlay = document.createElement("div");
   overlay.className =
-    "fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50";
+    "pop fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 overflow-y-auto";
   overlay.style.animation = "fadeIn 0.3s ease";
 
   // Create modal content
@@ -713,11 +713,12 @@ function showModal(title, content) {
   });
 
   // Close on overlay click
-  overlay.addEventListener("click", (e) => {
-    if (e.target === overlay) {
+  const pops = document.querySelectorAll(".pop");
+  pops.forEach((pop) => {
+    pop.addEventListener("click", () => {
       overlay.style.animation = "fadeOut 0.3s ease forwards";
-      setTimeout(() => overlay.remove(), 300);
-    }
+      setTimeout(() => pop.remove(), 300);
+    });
   });
 }
 
