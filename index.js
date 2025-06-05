@@ -124,12 +124,32 @@ function initializeContactForm() {
       submitBtn.textContent = "Sending...";
       submitBtn.disabled = true;
 
-      setTimeout(() => {
-        submitBtn.textContent = originalText;
-        submitBtn.disabled = false;
-        showNotification("Message sent successfully!", "success");
-        form.reset();
-      }, 2000);
+      emailjs
+        .send("service_kuhcvag", "template_6vnjjdi", {
+          title: "",
+          name: `${name}`,
+          from_email: `${email}`,
+          message: `${message}`,
+        })
+        .then(
+          () => {
+            setTimeout(() => {
+              submitBtn.textContent = originalText;
+              submitBtn.disabled = false;
+              showNotification("Message sent successfully!", "success");
+              form.reset();
+            }, 2000);
+          },
+          (error) => {
+            setTimeout(() => {
+              submitBtn.textContent = originalText;
+              submitBtn.disabled = false;
+              showNotification("Error sending message!", "error");
+              console.error("Error sending email:", error);
+              form.reset();
+            }, 2000);
+          }
+        );
     });
   }
 }

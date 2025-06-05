@@ -5,8 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vibuddha Vidarshana - Full Stack Developer</title>
-    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="./index.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function () {
+            emailjs.init({
+                publicKey: "ImpPFCrv1ue9LqfC9",
+            });
+        })();
+    </script>
 </head>
 
 <body class="bg-gray-900 text-white overflow-x-hidden">
@@ -295,7 +303,7 @@
                 </div>
 
                 <div class="animate-slide-in-right">
-                    <form class="space-y-4 sm:space-y-6">
+                    <form class="space-y-4 sm:space-y-6 pb-5">
                         <div>
                             <input type="text" placeholder="Your Name"
                                 class="w-full px-3 sm:px-4 py-2 sm:py-3 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:border-purple-500 transition-colors text-sm sm:text-base">
