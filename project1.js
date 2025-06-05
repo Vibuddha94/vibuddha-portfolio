@@ -68,10 +68,7 @@ function initHeroAnimations() {
 
   if (githubBtn) {
     githubBtn.addEventListener("click", () => {
-      showModal(
-        "GitHub Repository",
-        "This would redirect to the GitHub repository containing the complete Spring Boot source code for Nexivus."
-      );
+      showNotification(`Opening GitHub Repository...`, "info");
     });
   }
 }
@@ -231,23 +228,24 @@ function initSmoothScrolling() {
 
 // Mobile menu functionality
 function initMobileMenu() {
-  const mobileMenuBtn = document.querySelector(".md\\:hidden button");
+  const mobileMenuBtn = document.getElementById("mobile-menu-toggle");
   const nav = document.querySelector("nav");
+  const mobileMenu = document.getElementById("mobile-menu");
+  let isMenuOpen = false;
 
   if (mobileMenuBtn) {
     mobileMenuBtn.addEventListener("click", () => {
-      const navLinks = nav.querySelector(".hidden.md\\:flex");
-      if (navLinks) {
-        navLinks.classList.toggle("hidden");
-        navLinks.classList.toggle("flex");
-        navLinks.classList.toggle("flex-col");
-        navLinks.classList.toggle("absolute");
-        navLinks.classList.toggle("top-full");
-        navLinks.classList.toggle("left-0");
-        navLinks.classList.toggle("w-full");
-        navLinks.classList.toggle("bg-white");
-        navLinks.classList.toggle("shadow-lg");
-        navLinks.classList.toggle("p-4");
+      isMenuOpen = !isMenuOpen;
+      if (isMenuOpen) {
+        mobileMenu.classList.remove("hidden");
+        mobileMenu.classList.add("flex");
+        nav.classList.add("bg-white/90");
+        nav.classList.remove("glass-effect");
+      } else {
+        mobileMenu.classList.add("hidden");
+        mobileMenu.classList.remove("flex");
+        nav.classList.remove("bg-white/90");
+        nav.classList.add("glass-effect");
       }
     });
   }
@@ -838,5 +836,33 @@ window.addEventListener("load", () => {
     setTimeout(() => loader.remove(), 500);
   }, 1000);
 });
+
+// Notification system
+function showNotification(message, type = "info") {
+  const notification = document.createElement("div");
+  notification.className = `fixed top-20 right-6 z-50 p-4 rounded-lg shadow-lg transform translate-x-full transition-transform duration-300 ${
+    type === "success"
+      ? "bg-green-500"
+      : type === "error"
+      ? "bg-red-500"
+      : "bg-blue-500"
+  }`;
+  notification.textContent = message;
+
+  document.body.appendChild(notification);
+
+  // Slide in
+  setTimeout(() => {
+    notification.style.transform = "translateX(0)";
+  }, 100);
+
+  // Slide out and remove
+  setTimeout(() => {
+    notification.style.transform = "translateX(full)";
+    setTimeout(() => {
+      notification.remove();
+    }, 300);
+  }, 3000);
+}
 
 console.log("🚀 Nexivus Interactive Features Loaded Successfully!");
