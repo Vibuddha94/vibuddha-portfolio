@@ -63,48 +63,6 @@ function throttle(func, limit) {
   };
 }
 
-// Interactive cursor effect
-function initializeCursor() {
-  let cursor = document.querySelector(".cursor");
-
-  // Create cursor if it doesn't exist
-  if (!cursor) {
-    cursor = document.createElement("div");
-    cursor.className =
-      "cursor fixed w-4 h-4 bg-purple-500 rounded-full pointer-events-none z-50 mix-blend-difference opacity-0 transition-opacity duration-300";
-    document.body.appendChild(cursor);
-  }
-
-  // Show cursor on mouse move
-  document.addEventListener("mousemove", (e) => {
-    cursor.style.left = e.clientX - 8 + "px";
-    cursor.style.top = e.clientY - 8 + "px";
-    cursor.style.opacity = "1";
-  });
-
-  // Hide cursor when leaving window
-  document.addEventListener("mouseleave", () => {
-    cursor.style.opacity = "0";
-  });
-
-  // Scale cursor on interactive elements
-  const interactiveElements = document.querySelectorAll(
-    "button, a, .project-card, .skill-item"
-  );
-
-  interactiveElements.forEach((el) => {
-    el.addEventListener("mouseenter", () => {
-      cursor.style.transform = "scale(2)";
-      cursor.style.backgroundColor = "#f59e0b";
-    });
-
-    el.addEventListener("mouseleave", () => {
-      cursor.style.transform = "scale(1)";
-      cursor.style.backgroundColor = "#8b5cf6";
-    });
-  });
-}
-
 // Mobile menu toggle
 function initializeMobileMenu() {
   const mobileMenuBtn = document.querySelector(".md\\:hidden");
@@ -234,7 +192,6 @@ function initializeProjectCards() {
 // Initialize everything when DOM is loaded
 document.addEventListener("DOMContentLoaded", () => {
   initializeAnimations();
-  initializeCursor();
   initializeMobileMenu();
   initializeContactForm();
   animateSkillBars();
