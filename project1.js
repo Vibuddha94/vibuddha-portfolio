@@ -250,6 +250,13 @@ function initMobileMenu() {
     });
   }
 }
+function closeMobileMenu() {
+  const mobileMenu = document.getElementById("mobile-menu");
+  if (mobileMenu) {
+    mobileMenu.classList.add("hidden");
+    mobileMenu.classList.remove("flex");
+  }
+}
 
 // Interactive features and hover effects
 function initInteractiveFeatures() {
