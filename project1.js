@@ -236,25 +236,38 @@ function initMobileMenu() {
   if (mobileMenuBtn) {
     mobileMenuBtn.addEventListener("click", () => {
       isMenuOpen = !isMenuOpen;
+      const icon = document.querySelector("#mobile-menu-toggle i");
+
       if (isMenuOpen) {
         mobileMenu.classList.remove("hidden");
         mobileMenu.classList.add("flex");
         nav.classList.add("bg-white/90");
         nav.classList.remove("glass-effect");
+        icon.classList.remove("fa-bars");
+        icon.classList.add("fa-times");
       } else {
         mobileMenu.classList.add("hidden");
         mobileMenu.classList.remove("flex");
         nav.classList.remove("bg-white/90");
         nav.classList.add("glass-effect");
+        icon.classList.remove("fa-times");
+        icon.classList.add("fa-bars");
       }
     });
   }
 }
+// Close mobile menu when clicking outside
 function closeMobileMenu() {
   const mobileMenu = document.getElementById("mobile-menu");
+  const nav = document.querySelector("nav");
+  const icon = document.querySelector("#mobile-menu-toggle i");
   if (mobileMenu) {
     mobileMenu.classList.add("hidden");
     mobileMenu.classList.remove("flex");
+    nav.classList.remove("bg-white/90");
+    nav.classList.add("glass-effect");
+    icon.classList.remove("fa-times");
+    icon.classList.add("fa-bars");
     initMobileMenu(); // Reset state
   }
 }
