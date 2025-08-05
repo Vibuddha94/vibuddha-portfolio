@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NIC Detail Extractor - Sri Lankan NIC Parser</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./project6.css">
+</head>
+
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 glass-effect border-b border-white/20">
+        <div class="container mx-auto px-4 sm:px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2 sm:space-x-3">
+                    <div
+                        class="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-r from-green-500 to-emerald-600 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-id-card text-white text-lg sm:text-xl"></i>
+                    </div>
+                    <span class="text-lg sm:text-xl font-bold text-gray-800">NIC Detail Extractor</span>
+                </div>
+                <div class="hidden md:flex space-x-6 lg:space-x-8">
+                    <a href="./index.html"
+                        class="nav-link text-gray-700 hover:text-purple-600 transition-colors font-semibold">Home</a>
+                    <a href="#overview"
+                        class="nav-link text-gray-700 hover:text-purple-600 transition-colors">Overview</a>
+                    <a href="#features"
+                        class="nav-link text-gray-700 hover:text-purple-600 transition-colors">Features</a>
+                    <a href="#tech-stack" class="nav-link text-gray-700 hover:text-purple-600 transition-colors">Tech
+                        Stack</a>
+                    <a href="#api" class="nav-link text-gray-700 hover:text-purple-600 transition-colors">Demo</a>
+                </div>
+                <button class="md:hidden text-gray-700 p-2" id="mobile-menu-toggle">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div class="mt-4 pb-4 px-4 sm:px-6 hidden" id="mobile-menu">
+            <div class="flex flex-col space-y-3">
+                <a href="./index.html" onclick="closeMobileMenu()"
+                    class="text-gray-700 hover:text-emerald-400 py-2 px-2 font-semibold">Home</a>
+                <a href="#overview" onclick="closeMobileMenu()"
+                    class="text-gray-700 hover:text-emerald-400 py-2 px-2">Overview</a>
+                <a href="#features" onclick="closeMobileMenu()"
+                    class="text-gray-700 hover:text-emerald-400 py-2 px-2">Features</a>
+                <a href="#tech-stack" onclick="closeMobileMenu()"
+                    class="text-gray-700 hover:text-emerald-400 py-2 px-2">Tech Stack</a>
+                <a href="#api" onclick="closeMobileMenu()"
+                    class="text-gray-700 hover:text-emerald-400 py-2 px-2">Demo</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section
+        class="relative min-h-screen flex items-center bg-gradient-to-r from-green-400 to-green-600 overflow-hidden">
+        <div class="absolute inset-0 bg-black/20"></div>
+        <div class="container mx-auto px-4 sm:px-6 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+                <div class="text-white slide-in">
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+                        <span class="block bg-gradient-to-r from-white to-green-100 bg-clip-text text-transparent">NIC
+                            Detail Extractor</span>
+                        <span
+                            class="text-xl sm:text-2xl lg:text-3xl font-normal bg-gradient-to-r from-green-100 to-emerald-200 bg-clip-text text-transparent typewriter typing-animation border-r-2 border-green-400">
+                            Sri Lankan NIC Parser
+                        </span>
+                    </h1>
+                    <p
+                        class="text-lg sm:text-xl bg-gradient-to-r from-white to-green-100 bg-clip-text text-transparent mb-8 leading-relaxed">
+                        A modern React application that extracts and displays personal information from Sri Lankan
+                        National Identity Card (NIC) numbers. Built with clean interface and powerful validation
+                        using the lanka-nic library for accurate data parsing.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-3 sm:gap-4">
+                        <a href="https://github.com/Vibuddha94/nic-detail" target="_blank" rel="noopener noreferrer">
+                            <button
+                                class="border-2 border-white text-white px-6 sm:px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-green-600 transition-all">
+                                <i class="fab fa-github mr-2"></i>View Source Code
+                            </button>
+                        </a>
+                    </div>
+                </div>
+                <div class="hidden lg:block">
+                    <div class="floating">
+                        <div class="modern-card rounded-3xl p-6 xl:p-8 shadow-2xl bg-white">
+                            <div
+                                class="code-highlight rounded-xl p-4 xl:p-6 text-green-400 font-mono text-xs sm:text-sm">
+                                <div class="flex items-center space-x-2 mb-4">
+                                    <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+                                    <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                                    <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                                    <span class="text-gray-400 ml-4 text-xs">nicExtractor.js</span>
+                                </div>
+                                <div id="code-display" class="space-y-2"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Overview Section -->
+    <section id="overview" class="py-12 sm:py-16 lg:py-20 bg-white">
+        <div class="container mx-auto px-4 sm:px-6">
+            <div class="text-center mb-12 sm:mb-16">
+                <h2 class="text-3xl sm:text-4xl font-bold text-gray-800 mb-4">Project Overview</h2>
+                <div class="w-16 sm:w-24 h-1 bg-gradient-to-r from-green-500 to-emerald-500 mx-auto"></div>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+                <div class="space-y-6">
+                    <h3 class="text-2xl sm:text-3xl font-bold text-green-600">Sri Lankan NIC Parser</h3>
+                    <p class="text-gray-600 leading-relaxed text-sm sm:text-base">
+                        A modern React application that extracts and displays personal information from Sri Lankan
+                        National Identity Card (NIC) numbers. Built with a clean, responsive interface and powerful
+                        validation using the lanka-nic library for accurate data parsing.
+                    </p>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-green-50 p-3 sm:p-4 rounded-lg">
+                            <div class="text-xl sm:text-2xl font-bold text-green-600 mb-1">100%</div>
+                            <div class="text-gray-600 text-xs sm:text-sm">Accurate Parsing</div>
+                        </div>
+                        <div class="bg-green-50 p-3 sm:p-4 rounded-lg">
+                            <div class="text-xl sm:text-2xl font-bold text-green-600 mb-1">React 19</div>
+                            <div class="text-gray-600 text-xs sm:text-sm">Modern Framework</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gradient-to-br from-green-100 to-emerald-100 p-6 sm:p-8 rounded-2xl">
+                    <h4 class="text-lg sm:text-xl font-bold text-green-800 mb-4">Key Information Extracted</h4>
+                    <div class="space-y-3">
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-calendar-alt text-green-600"></i>
+                            <span class="text-gray-700 text-sm sm:text-base">Date of Birth</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-venus-mars text-green-600"></i>
+                            <span class="text-gray-700 text-sm sm:text-base">Gender Information</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-calculator text-green-600"></i>
+                            <span class="text-gray-700 text-sm sm:text-base">Age Calculation</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-check-circle text-green-600"></i>
+                            <span class="text-gray-700 text-sm sm:text-base">NIC Validation</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-12 sm:py-16 lg:py-20 bg-gray-50">
+        <div class="container mx-auto px-4 sm:px-6">
+            <div class="text-center mb-12 sm:mb-16">
+                <h2 class="text-3xl sm:text-4xl font-bold text-gray-800 mb-4">Core Features</h2>
+                <div class="w-16 sm:w-24 h-1 bg-gradient-to-r from-green-500 to-emerald-500 mx-auto mb-4"></div>
+                <p class="text-gray-600 max-w-2xl mx-auto text-sm sm:text-base">
+                    Comprehensive NIC parsing with modern UI components and user-friendly interface
+                </p>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                <div class="feature-card bg-white p-6 sm:p-8 rounded-2xl shadow-lg">
+                    <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mb-4 sm:mb-6">
+                        <i class="fas fa-id-card text-green-600 text-xl"></i>
+                    </div>
+                    <h3 class="text-lg sm:text-xl font-bold text-gray-800 mb-3 sm:mb-4">NIC Validation</h3>
+                    <p class="text-gray-600 text-sm sm:text-base">
+                        Real-time validation of Sri Lankan NIC numbers with comprehensive error handling and user
+                        feedback.
+                    </p>
+                </div>
+
+                <div class="feature-card bg-white p-6 sm:p-8 rounded-2xl shadow-lg">
+                    <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mb-4 sm:mb-6">
+                        <i class="fas fa-calendar-day text-blue-600 text-xl"></i>
+                    </div>
+                    <h3 class="text-lg sm:text-xl font-bold text-gray-800 mb-3 sm:mb-4">Date Extraction</h3>
+                    <p class="text-gray-600 text-sm sm:text-base">
+                        Accurate birth date extraction with proper formatting and validation from NIC numbers.
+                    </p>
+                </div>
+
+                <div class="feature-card bg-white p-6 sm:p-8 rounded-2xl shadow-lg">
+                    <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mb-4 sm:mb-6">
+                        <i class="fas fa-user text-purple-600 text-xl"></i>
+                    </div>
+                    <h3 class="text-lg sm:text-xl font-bold text-gray-800 mb-3 sm:mb-4">Gender Detection</h3>
+                    <p class="text-gray-600 text-sm sm:text-base">
+                        Automatic gender identification based on NIC number patterns and Sri Lankan ID conventions.
+                    </p>
+                </div>
+
+                <div class="feature-card bg-white p-6 sm:p-8 rounded-2xl shadow-lg">
+                    <div class="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center mb-4 sm:mb-6">
+                        <i class="fas fa-mobile-alt text-red-600 text-xl"></i>
+                    </div>
+                    <h3 class="text-lg sm:text-xl font-bold text-gray-800 mb-3 sm:mb-4">Responsive Design</h3>
+                    <p class="text-gray-600 text-sm sm:text-base">
+                        Mobile-first responsive design ensuring optimal user experience across all devices.
+                    </p>
+                </div>
+
+                <div class="feature-card bg-white p-6 sm:p-8 rounded-2xl shadow-lg">
+                    <div class="w-12 h-12 bg-yellow-100 rounded-xl flex items-center justify-center mb-4 sm:mb-6">
+                        <i class="fas fa-cogs text-yellow-600 text-xl"></i>
+                    </div>
+                    <h3 class="text-lg sm:text-xl font-bold text-gray-800 mb-3 sm:mb-4">Reusable Components</h3>
+                    <p class="text-gray-600 text-sm sm:text-base">
+                        Modular component architecture with reusable input fields, buttons, and form elements.
+                    </p>
+                </div>
+
+                <div class="feature-card bg-white p-6 sm:p-8 rounded-2xl shadow-lg">
+                    <div class="w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center mb-4 sm:mb-6">
+                        <i class="fas fa-shield-alt text-indigo-600 text-xl"></i>
+                    </div>
+                    <h3 class="text-lg sm:text-xl font-bold text-gray-800 mb-3 sm:mb-4">Input Validation</h3>
+                    <p class="text-gray-600 text-sm sm:text-base">
+                        Comprehensive input validation with real-time feedback and error prevention mechanisms.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Stack Section -->
+    <section id="tech-stack" class="py-12 sm:py-16 lg:py-20 bg-white">
+        <div class="container mx-auto px-4 sm:px-6">
+            <div class="text-center mb-12 sm:mb-16">
+                <h2 class="text-3xl sm:text-4xl font-bold text-gray-800 mb-4">Technology Stack</h2>
+                <div class="w-16 sm:w-24 h-1 bg-gradient-to-r from-green-500 to-emerald-500 mx-auto mb-4"></div>
+                <p class="text-gray-600 max-w-2xl mx-auto text-sm sm:text-base">
+                    Built with modern web technologies for optimal performance and maintainability
+                </p>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                <!-- Frontend -->
+                <div class="tech-category bg-gradient-to-br from-blue-50 to-blue-100 p-6 sm:p-8 rounded-2xl">
+                    <h3 class="text-lg sm:text-xl font-bold text-blue-800 mb-4 sm:mb-6 flex items-center">
+                        <i class="fas fa-laptop-code mr-3"></i>Frontend
+                    </h3>
+                    <div class="space-y-2 sm:space-y-3">
+                        <div class="tech-badge bg-blue-600 text-white px-3 sm:px-4 py-2 rounded-lg text-sm font-medium">
+                            React 19
+                        </div>
+                        <div
+                            class="tech-badge bg-purple-600 text-white px-3 sm:px-4 py-2 rounded-lg text-sm font-medium">
+                            Vite
+                        </div>
+                        <div class="tech-badge bg-blue-500 text-white px-3 sm:px-4 py-2 rounded-lg text-sm font-medium">
+                            CSS3
+                        </div>
+                        <div
+                            class="tech-badge bg-orange-500 text-white px-3 sm:px-4 py-2 rounded-lg text-sm font-medium">
+                            HTML5
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Libraries & Tools -->
+                <div class="tech-category bg-gradient-to-br from-green-50 to-green-100 p-6 sm:p-8 rounded-2xl">
+                    <h3 class="text-lg sm:text-xl font-bold text-green-800 mb-4 sm:mb-6 flex items-center">
+                        <i class="fas fa-tools mr-3"></i>Libraries
+                    </h3>
+                    <div class="space-y-2 sm:space-y-3">
+                        <div
+                            class="tech-badge bg-green-600 text-white px-3 sm:px-4 py-2 rounded-lg text-sm font-medium">
+                            lanka-nic
+                        </div>
+                        <div
+                            class="tech-badge bg-yellow-600 text-white px-3 sm:px-4 py-2 rounded-lg text-sm font-medium">
+                            JavaScript ES6+
+                        </div>
+                        <div class="tech-badge bg-gray-600 text-white px-3 sm:px-4 py-2 rounded-lg text-sm font-medium">
+                            ESLint
+                        </div>
+                        <div
+                            class="tech-badge bg-indigo-600 text-white px-3 sm:px-4 py-2 rounded-lg text-sm font-medium">
+                            CSS Modules
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Development -->
+                <div class="tech-category bg-gradient-to-br from-purple-50 to-purple-100 p-6 sm:p-8 rounded-2xl">
+                    <h3 class="text-lg sm:text-xl font-bold text-purple-800 mb-4 sm:mb-6 flex items-center">
+                        <i class="fas fa-code mr-3"></i>Development
+                    </h3>
+                    <div class="space-y-2 sm:space-y-3">
+                        <div
+                            class="tech-badge bg-orange-600 text-white px-3 sm:px-4 py-2 rounded-lg text-sm font-medium">
+                            Component Architecture
+                        </div>
+                        <div class="tech-badge bg-red-600 text-white px-3 sm:px-4 py-2 rounded-lg text-sm font-medium">
+                            State Management
+                        </div>
+                        <div class="tech-badge bg-teal-600 text-white px-3 sm:px-4 py-2 rounded-lg text-sm font-medium">
+                            Form Validation
+                        </div>
+                        <div class="tech-badge bg-pink-600 text-white px-3 sm:px-4 py-2 rounded-lg text-sm font-medium">
+                            Event Handling
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Section -->
+    <section id="api" class="py-12 sm:py-16 lg:py-20 bg-gray-50">
+        <div class="container mx-auto px-4 sm:px-6">
+            <div class="text-center mb-12 sm:mb-16">
+                <h2 class="text-3xl sm:text-4xl font-bold text-gray-800 mb-4">Demo & Features</h2>
+                <div class="w-16 sm:w-24 h-1 bg-gradient-to-r from-green-500 to-emerald-500 mx-auto mb-4"></div>
+                <p class="text-gray-600 max-w-2xl mx-auto text-sm sm:text-base">
+                    Interactive demonstration of the NIC detail extraction capabilities
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-8 lg:gap-12">
+                <!-- Demo Interface -->
+                <div class="api-section bg-white p-6 sm:p-8 rounded-2xl shadow-lg">
+                    <h3 class="text-xl sm:text-2xl font-bold text-gray-800 mb-6">Try the NIC Extractor</h3>
+                    <div class="space-y-6">
+                        <div class="bg-gray-50 p-4 rounded-lg border-2 border-dashed border-gray-300">
+                            <div class="text-center">
+                                <i class="fas fa-id-card text-4xl text-green-500 mb-4"></i>
+                                <h4 class="text-lg font-semibold text-gray-700 mb-2">Sample NIC Numbers</h4>
+                                <p class="text-sm text-gray-600 mb-4">Try these sample NIC numbers:</p>
+                                <div class="space-y-2 text-sm">
+                                    <div class="bg-white p-2 rounded border">942151234V - Born 1994/05/15 (Male)</div>
+                                    <div class="bg-white p-2 rounded border">875432109V - Born 1987/12/25 (Female)</div>
+                                    <div class="bg-white p-2 rounded border">199412345678 - Born 1994/05/15 (Male)</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Feature List -->
+                <div class="space-y-4 sm:space-y-6">
+                    <div class="api-endpoint bg-white p-4 sm:p-6 rounded-xl border-l-4 border-green-500 shadow-sm">
+                        <div class="flex items-center justify-between mb-2">
+                            <span
+                                class="px-2 py-1 bg-green-100 text-green-800 rounded text-xs font-medium">EXTRACT</span>
+                            <code class="text-sm text-gray-600">Birth Date</code>
+                        </div>
+                        <p class="text-gray-700 text-sm">
+                            Extracts accurate birth date from both old format (10 digits) and new format (12 digits) NIC
+                            numbers.
+                        </p>
+                    </div>
+
+                    <div class="api-endpoint bg-white p-4 sm:p-6 rounded-xl border-l-4 border-blue-500 shadow-sm">
+                        <div class="flex items-center justify-between mb-2">
+                            <span
+                                class="px-2 py-1 bg-blue-100 text-blue-800 rounded text-xs font-medium">IDENTIFY</span>
+                            <code class="text-sm text-gray-600">Gender</code>
+                        </div>
+                        <p class="text-gray-700 text-sm">
+                            Determines gender based on the day number pattern in Sri Lankan NIC format.
+                        </p>
+                    </div>
+
+                    <div class="api-endpoint bg-white p-4 sm:p-6 rounded-xl border-l-4 border-purple-500 shadow-sm">
+                        <div class="flex items-center justify-between mb-2">
+                            <span
+                                class="px-2 py-1 bg-purple-100 text-purple-800 rounded text-xs font-medium">VALIDATE</span>
+                            <code class="text-sm text-gray-600">NIC Format</code>
+                        </div>
+                        <p class="text-gray-700 text-sm">
+                            Validates NIC number format and structure according to Sri Lankan NIC standards.
+                        </p>
+                    </div>
+
+                    <div class="api-endpoint bg-white p-4 sm:p-6 rounded-xl border-l-4 border-orange-500 shadow-sm">
+                        <div class="flex items-center justify-between mb-2">
+                            <span
+                                class="px-2 py-1 bg-orange-100 text-orange-800 rounded text-xs font-medium">DISPLAY</span>
+                            <code class="text-sm text-gray-600">User Interface</code>
+                        </div>
+                        <p class="text-gray-700 text-sm">
+                            Clean, intuitive interface with real-time validation and instant feedback display.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 py-8 sm:py-12">
+        <div class="container mx-auto px-4 sm:px-6 text-center">
+            <div class="flex justify-center space-x-6 mb-6 sm:mb-8">
+                <a href="https://github.com/Vibuddha94" target="_blank" rel="noopener noreferrer"
+                    class="text-gray-400 hover:text-white transition-colors">
+                    <i class="fab fa-github text-xl sm:text-2xl"></i>
+                </a>
+                <a href="https://linkedin.com/in/vibuddha-vidarshana" target="_blank" rel="noopener noreferrer"
+                    class="text-gray-400 hover:text-white transition-colors">
+                    <i class="fab fa-linkedin text-xl sm:text-2xl"></i>
+                </a>
+            </div>
+            <p class="text-gray-400 text-sm sm:text-base">
+                © 2025 Vibuddha Vidarshana. Built with React & Vite for NIC detail extraction.
+            </p>
+        </div>
+    </footer>
+
+    <script src="./project6.js"></script>
+</body>
+
+</html>

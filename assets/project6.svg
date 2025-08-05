@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" fill="none">
+  <!-- Background -->
+  <rect width="400" height="300" fill="url(#gradient)" rx="20"/>
+  
+  <!-- ID Card Shape -->
+  <rect x="80" y="60" width="240" height="140" fill="#ffffff" rx="10" stroke="#007E00" stroke-width="3"/>
+  
+  <!-- Photo Area -->
+  <rect x="100" y="80" width="60" height="80" fill="#e5f7e5" rx="5" stroke="#007E00" stroke-width="1"/>
+  <circle cx="130" cy="110" r="15" fill="#007E00" opacity="0.6"/>
+  <path d="M120 125 L140 125 L135 135 L125 135 Z" fill="#007E00" opacity="0.6"/>
+  
+  <!-- Text Lines -->
+  <rect x="180" y="85" width="100" height="8" fill="#007E00" rx="2"/>
+  <rect x="180" y="100" width="80" height="6" fill="#22c55e" rx="2"/>
+  <rect x="180" y="115" width="90" height="6" fill="#22c55e" rx="2"/>
+  <rect x="180" y="130" width="70" height="6" fill="#22c55e" rx="2"/>
+  
+  <!-- Chip -->
+  <rect x="100" y="175" width="30" height="20" fill="#fbbf24" rx="3" stroke="#f59e0b" stroke-width="1"/>
+  <rect x="105" y="180" width="20" height="10" fill="#f59e0b" rx="1"/>
+  
+  <!-- Logo -->
+  <circle cx="280" cy="185" r="12" fill="#007E00"/>
+  <path d="M275 180 L285 180 L280 190 Z" fill="#ffffff"/>
+  
+  <!-- Data extraction visualization -->
+  <g opacity="0.8">
+    <!-- Arrow pointing from card to data -->
+    <path d="M240 140 Q280 140 300 160" stroke="#007E00" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+    
+    <!-- Data output box -->
+    <rect x="300" y="150" width="80" height="60" fill="#ffffff" rx="5" stroke="#007E00" stroke-width="2"/>
+    <text x="310" y="165" font-family="Arial, sans-serif" font-size="8" fill="#007E00">Date: 1994/05/15</text>
+    <text x="310" y="178" font-family="Arial, sans-serif" font-size="8" fill="#007E00">Gender: Male</text>
+    <text x="310" y="191" font-family="Arial, sans-serif" font-size="8" fill="#007E00">Age: 30</text>
+    <text x="310" y="204" font-family="Arial, sans-serif" font-size="8" fill="#007E00">Valid: ✓</text>
+  </g>
+  
+  <!-- React Logo -->
+  <g transform="translate(50, 220)">
+    <circle cx="0" cy="0" r="8" fill="none" stroke="#61dafb" stroke-width="1.5"/>
+    <ellipse cx="0" cy="0" rx="20" ry="6" fill="none" stroke="#61dafb" stroke-width="1.5"/>
+    <ellipse cx="0" cy="0" rx="20" ry="6" fill="none" stroke="#61dafb" stroke-width="1.5" transform="rotate(60)"/>
+    <ellipse cx="0" cy="0" rx="20" ry="6" fill="none" stroke="#61dafb" stroke-width="1.5" transform="rotate(-60)"/>
+    <circle cx="0" cy="0" r="2" fill="#61dafb"/>
+  </g>
+  
+  <!-- Vite Logo -->
+  <g transform="translate(350, 40)">
+    <path d="M0 0 L8 14 L-8 14 Z" fill="#646cff"/>
+    <path d="M0 2 L6 12 L-6 12 Z" fill="#ffd028"/>
+  </g>
+  
+  <!-- Title -->
+  <text x="200" y="35" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle">NIC Detail Extractor</text>
+  
+  <!-- Gradient Definition -->
+  <defs>
+    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#007E00;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#22c55e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#059669;stop-opacity:1" />
+    </linearGradient>
+    
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#007E00"/>
+    </marker>
+  </defs>
+</svg>
