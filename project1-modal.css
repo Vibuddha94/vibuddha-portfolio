@@ -1,0 +1,72 @@
+/* Modal Styles for API Documentation */
+.modal-backdrop {
+    animation: fadeIn 0.2s ease-out;
+}
+
+.api-modal {
+    transform: scale(0.95);
+    opacity: 0;
+    transition: all 0.2s ease-out;
+    scrollbar-width: thin;
+    scrollbar-color: #cbd5e1 #f1f5f9;
+}
+
+.api-modal::-webkit-scrollbar {
+    width: 8px;
+}
+
+.api-modal::-webkit-scrollbar-track {
+    background: #f1f5f9;
+    border-radius: 4px;
+}
+
+.api-modal::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 4px;
+}
+
+.api-modal::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+.api-modal.show {
+    transform: scale(1);
+    opacity: 1;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* Enhanced API Endpoint Animations */
+.api-endpoint {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.api-endpoint::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.api-endpoint:hover::before {
+    left: 100%;
+}
+
+.api-endpoint:active {
+    transform: translateX(4px) scale(0.98);
+}

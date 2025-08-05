@@ -1,18 +1,20 @@
 // Portfolio JavaScript - Interactive Features and Animations
 
 // Smooth scrolling for navigation links
-document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-  anchor.addEventListener("click", function (e) {
-    e.preventDefault();
-    const target = document.querySelector(this.getAttribute("href"));
-    if (target) {
-      target.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-    }
+function initializeSmoothScrolling() {
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener("click", function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute("href"));
+      if (target) {
+        target.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
+    });
   });
-});
+}
 
 // Intersection Observer for scroll-triggered animations
 const observerOptions = {
@@ -87,15 +89,17 @@ function initializeMobileMenu() {
 }
 
 // close mobile menu on link click
-document.querySelectorAll("#mobile-menu a").forEach((link) => {
-  link.addEventListener("click", () => {
-    const mobileMenu = document.getElementById("mobile-menu");
-    mobileMenu.classList.add("hidden");
-    const mobileMenuBtn = document.querySelector(".md\\:hidden");
-    mobileMenuBtn.innerHTML = "☰";
-    initializeMobileMenu(); // Reset state
+function initializeMobileMenuLinks() {
+  document.querySelectorAll("#mobile-menu a").forEach((link) => {
+    link.addEventListener("click", () => {
+      const mobileMenu = document.getElementById("mobile-menu");
+      mobileMenu.classList.add("hidden");
+      const mobileMenuBtn = document.querySelector(".md\\:hidden");
+      mobileMenuBtn.innerHTML = "☰";
+      // Mobile menu state is automatically reset when hidden
+    });
   });
-});
+}
 
 // Form handling
 function initializeContactForm() {
@@ -218,6 +222,8 @@ function initializeProjectCards() {
 
 // Initialize everything when DOM is loaded
 document.addEventListener("DOMContentLoaded", () => {
+  initializeSmoothScrolling();
+  initializeMobileMenuLinks();
   initializeAnimations();
   initializeMobileMenu();
   initializeContactForm();

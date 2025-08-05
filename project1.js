@@ -1,17 +1,1065 @@
 // Nexivus Project Page - Interactive JavaScript
+// Enhanced with modern ES6+ features and smooth animations
 
 document.addEventListener("DOMContentLoaded", function () {
-  // Initialize all features
-  initNavigation();
-  initHeroAnimations();
-  initScrollAnimations();
-  initTypewriterEffect();
-  initCodeDisplay();
-  initSmoothScrolling();
+  // Initialize all interactive features
   initMobileMenu();
-  initInteractiveFeatures();
-  initParticleBackground();
+  initSmoothScrolling();
+  initCodeAnimation();
+  initScrollAnimations();
+  initInteractiveButtons();
+  initParallaxEffects();
+  initTypewriterEffect();
+  initTechBadgeEffects();
+  initApiEndpointEffects();
 });
+
+// Enhanced typewriter effect
+function initTypewriterEffect() {
+  const typewriterText = document.querySelector(".typing-animation");
+  if (!typewriterText) return;
+
+  const phrases = [
+    "Built with Spring Boot",
+    "JWT Authentication System",
+    "Point of Sale Solution",
+    "Inventory Management",
+    "RESTful API Architecture",
+    "Point of Sale System",
+  ];
+
+  let currentPhrase = 0;
+  let currentChar = 0;
+  let isDeleting = false;
+
+  function typeWriter() {
+    const current = phrases[currentPhrase];
+
+    if (isDeleting) {
+      typewriterText.textContent = current.substring(0, currentChar - 1);
+      currentChar--;
+    } else {
+      typewriterText.textContent = current.substring(0, currentChar + 1);
+      currentChar++;
+    }
+
+    let typeSpeed = isDeleting ? 100 : 150;
+
+    if (!isDeleting && currentChar === current.length) {
+      typeSpeed = 2000; // Pause at end
+      isDeleting = true;
+    } else if (isDeleting && currentChar === 0) {
+      isDeleting = false;
+      currentPhrase = (currentPhrase + 1) % phrases.length;
+      typeSpeed = 500;
+    }
+
+    setTimeout(typeWriter, typeSpeed);
+  }
+
+  // Start typewriter after initial animation
+  setTimeout(typeWriter, 3500);
+}
+
+// Enhanced mobile menu functionality
+function initMobileMenu() {
+  const mobileMenuBtn = document.getElementById("mobile-menu-toggle");
+  const nav = document.querySelector("nav");
+  const mobileMenu = document.getElementById("mobile-menu");
+  let isMenuOpen = false;
+
+  if (mobileMenuBtn) {
+    mobileMenuBtn.addEventListener("click", () => {
+      isMenuOpen = !isMenuOpen;
+      const icon = document.querySelector("#mobile-menu-toggle i");
+
+      if (isMenuOpen) {
+        mobileMenu.classList.remove("hidden");
+        mobileMenu.classList.add("flex");
+        nav.classList.add("bg-white/90");
+        nav.classList.remove("glass-effect");
+        icon.classList.remove("fa-bars");
+        icon.classList.add("fa-times");
+      } else {
+        mobileMenu.classList.add("hidden");
+        mobileMenu.classList.remove("flex");
+        nav.classList.remove("bg-white/90");
+        nav.classList.add("glass-effect");
+        icon.classList.remove("fa-times");
+        icon.classList.add("fa-bars");
+      }
+    });
+  }
+}
+
+// Close mobile menu when clicking outside
+function closeMobileMenu() {
+  const mobileMenu = document.getElementById("mobile-menu");
+  const nav = document.querySelector("nav");
+  const icon = document.querySelector("#mobile-menu-toggle i");
+
+  if (mobileMenu) {
+    mobileMenu.classList.add("hidden");
+    mobileMenu.classList.remove("flex");
+    nav.classList.remove("bg-white/90");
+    nav.classList.add("glass-effect");
+    icon.classList.remove("fa-times");
+    icon.classList.add("fa-bars");
+  }
+}
+
+// Smooth scrolling for navigation links
+function initSmoothScrolling() {
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener("click", function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute("href"));
+      if (target) {
+        target.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
+    });
+  });
+}
+
+// Code animation display
+function initCodeAnimation() {
+  const codeDisplay = document.getElementById("code-display");
+  if (!codeDisplay) return;
+
+  const codeLines = [
+    "@RestController",
+    '@RequestMapping("/api/v1/inventory")',
+    "public class InventoryController {",
+    "",
+    "  @Autowired",
+    "  private InventoryService inventoryService;",
+    "",
+    "  @GetMapping",
+    "  public List<ItemDto> getAllItems() {",
+    "    return inventoryService.getAllItems();",
+    "  }",
+    "",
+    "  @PreAuthorize(\"hasRole('ADMIN')\")",
+    "  @PostMapping",
+    "  public ItemDto saveItem(",
+    "    @RequestBody ItemDto itemDto) {",
+    "    return inventoryService.saveItem(itemDto);",
+    "  }",
+    "",
+    '  @DeleteMapping("/{id}")',
+    "  public Boolean deleteItem(@PathVariable Integer id) {",
+    "    return inventoryService.deleteItem(id);",
+    "  }",
+    "}",
+  ];
+
+  let currentLine = 0;
+  function displayNextLine() {
+    if (currentLine < codeLines.length) {
+      const lineElement = document.createElement("div");
+      lineElement.className = "code-line text-xs sm:text-sm";
+      lineElement.textContent = codeLines[currentLine];
+
+      // Color coding for different elements
+      if (
+        codeLines[currentLine].includes("@RestController") ||
+        codeLines[currentLine].includes("@RequestMapping") ||
+        codeLines[currentLine].includes("@Autowired") ||
+        codeLines[currentLine].includes("@GetMapping") ||
+        codeLines[currentLine].includes("@PostMapping") ||
+        codeLines[currentLine].includes("@DeleteMapping") ||
+        codeLines[currentLine].includes("@PreAuthorize")
+      ) {
+        lineElement.classList.add("text-yellow-400");
+      } else if (
+        codeLines[currentLine].includes("public") ||
+        codeLines[currentLine].includes("private") ||
+        codeLines[currentLine].includes("class")
+      ) {
+        lineElement.classList.add("text-purple-400");
+      } else if (codeLines[currentLine].includes("return")) {
+        lineElement.classList.add("text-pink-400");
+      } else if (
+        codeLines[currentLine].includes("InventoryController") ||
+        codeLines[currentLine].includes("InventoryService") ||
+        codeLines[currentLine].includes("ItemDto")
+      ) {
+        lineElement.classList.add("text-blue-400");
+      } else {
+        lineElement.classList.add("text-green-300");
+      }
+
+      codeDisplay.appendChild(lineElement);
+      currentLine++;
+      setTimeout(displayNextLine, 120);
+    }
+  }
+
+  setTimeout(displayNextLine, 1000);
+}
+
+// Scroll animations with Intersection Observer
+function initScrollAnimations() {
+  const observerOptions = {
+    threshold: 0.15,
+    rootMargin: "0px 0px -50px 0px",
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("animate-fade-in-up");
+        if (entry.target.classList.contains("feature-card")) {
+          entry.target.style.animationDelay = `${Math.random() * 0.5}s`;
+        }
+      }
+    });
+  }, observerOptions);
+
+  // Observe cards and sections for animation
+  document
+    .querySelectorAll(".feature-card, .tech-category, .api-section")
+    .forEach((el) => {
+      observer.observe(el);
+    });
+}
+
+// Interactive button effects
+function initInteractiveButtons() {
+  const buttons = document.querySelectorAll("button, .btn");
+
+  buttons.forEach((btn) => {
+    btn.addEventListener("mouseenter", function () {
+      this.style.transform = "translateY(-2px)";
+      this.style.boxShadow = "0 8px 25px rgba(0,0,0,0.15)";
+    });
+
+    btn.addEventListener("mouseleave", function () {
+      this.style.transform = "translateY(0)";
+      this.style.boxShadow = "none";
+    });
+  });
+}
+
+// Parallax effects for enhanced user experience
+function initParallaxEffects() {
+  window.addEventListener("scroll", () => {
+    const scrolled = window.pageYOffset;
+    const parallax = document.querySelector(".floating");
+
+    if (parallax) {
+      const speed = scrolled * 0.5;
+      parallax.style.transform = `translateY(${speed}px)`;
+    }
+  });
+}
+
+// Navigation scroll effect
+window.addEventListener("scroll", function () {
+  const nav = document.querySelector("nav");
+  if (window.scrollY > 50) {
+    nav.style.background = "rgba(255, 255, 255, 0.95)";
+    nav.style.backdropFilter = "blur(20px)";
+    nav.style.boxShadow = "0 2px 20px rgba(0,0,0,0.1)";
+  } else {
+    nav.style.background = "rgba(255, 255, 255, 0.1)";
+    nav.style.backdropFilter = "blur(10px)";
+    nav.style.boxShadow = "none";
+  }
+});
+
+// Tech badge hover effects
+function initTechBadgeEffects() {
+  const techBadges = document.querySelectorAll(".tech-badge");
+
+  techBadges.forEach((badge) => {
+    badge.addEventListener("mouseenter", function () {
+      this.style.transform = "scale(1.05) translateY(-2px)";
+      this.style.boxShadow = "0 10px 20px rgba(0,0,0,0.2)";
+    });
+
+    badge.addEventListener("mouseleave", function () {
+      this.style.transform = "scale(1) translateY(0)";
+      this.style.boxShadow = "none";
+    });
+
+    // Add click event for tech badge interaction
+    badge.addEventListener("click", function () {
+      const techName = this.textContent.trim();
+      showNotification(`Learning more about ${techName}...`, "info");
+    });
+  });
+}
+
+// API endpoint hover effects and modal system
+function initApiEndpointEffects() {
+  const apiEndpoints = document.querySelectorAll(".api-endpoint");
+
+  apiEndpoints.forEach((endpoint) => {
+    endpoint.addEventListener("mouseenter", function () {
+      this.style.backgroundColor = "rgba(59, 130, 246, 0.05)";
+      this.style.transform = "translateX(8px)";
+      this.style.paddingLeft = "20px";
+      this.style.borderLeft = "3px solid #3b82f6";
+    });
+
+    endpoint.addEventListener("mouseleave", function () {
+      this.style.backgroundColor = "transparent";
+      this.style.transform = "translateX(0)";
+      this.style.paddingLeft = "16px";
+      this.style.borderLeft = "1px solid #e5e7eb";
+    });
+
+    // Add click event for API endpoint modal
+    endpoint.addEventListener("click", function () {
+      const method = this.querySelector("span").textContent;
+      const endpoint = this.querySelector("code").textContent;
+      const description = this.querySelector("p").textContent;
+      showApiDialog(method, endpoint, description);
+    });
+  });
+}
+
+// Comprehensive API details database based on Nexivus Postman collection
+const apiDetails = {
+  "POST /auth/login": {
+    title: "User Authentication",
+    description:
+      "Authenticate user and generate JWT access token for protected endpoints",
+    requestBody: {
+      username: "vibuddha",
+      password: "Error@123",
+    },
+    responseExample: {
+      message: "Login successful",
+      token:
+        "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ2aWJ1ZGRoYSIsImlhdCI6MTcyOTI3NjkzNiwiZXhwIjoxNzI5MzYzMzM2fQ.Gj_ZTX50ot_tUk9krD190hVLCmD27oKmypvyqem1KTE",
+      user: {
+        id: 1,
+        username: "vibuddha",
+        fullname: "Vibuddha Vidarshana",
+      },
+    },
+    headers: {
+      "Content-Type": "application/json",
+    },
+  },
+  "GET /category": {
+    title: "Get All Categories",
+    description: "Retrieve all product categories for inventory organization",
+    requestBody: null,
+    responseExample: [
+      {
+        id: 1,
+        name: "Electronics",
+      },
+      {
+        id: 2,
+        name: "Beverages",
+      },
+      {
+        id: 6,
+        name: "Medicine",
+      },
+    ],
+    headers: {
+      "Content-Type": "application/json",
+    },
+  },
+  "POST /category": {
+    title: "Create New Category",
+    description: "Create a new product category for inventory classification",
+    requestBody: {
+      name: "Medicine",
+    },
+    responseExample: {
+      id: 6,
+      name: "Medicine",
+      message: "Category created successfully",
+    },
+    headers: {
+      "Content-Type": "application/json",
+    },
+  },
+  "GET /items": {
+    title: "Get All Items",
+    description:
+      "Retrieve all inventory items with category information (JWT required)",
+    requestBody: null,
+    responseExample: [
+      {
+        id: 1,
+        name: "Curry Powder",
+        description: "100g",
+        price: 350.0,
+        category: {
+          id: 6,
+          name: "Medicine",
+        },
+      },
+      {
+        id: 2,
+        name: "CocaCola",
+        description: "400ml",
+        price: 150.0,
+        category: {
+          id: 2,
+          name: "Beverages",
+        },
+      },
+    ],
+    headers: {
+      Authorization:
+        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ2aWJ1ZGRoYSIsImlhdCI6MTcyOTI3NjkzNiwiZXhwIjoxNzI5MzYzMzM2fQ.Gj_ZTX50ot_tUk9krD190hVLCmD27oKmypvyqem1KTE",
+      "Content-Type": "application/json",
+    },
+  },
+  "POST /items": {
+    title: "Create New Item",
+    description:
+      "Add a new product item to the inventory with pricing and category",
+    requestBody: {
+      name: "Curry Powder",
+      description: "100g",
+      price: 350,
+      categoryId: 6,
+    },
+    responseExample: {
+      id: 7,
+      name: "Curry Powder",
+      description: "100g",
+      price: 350.0,
+      category: {
+        id: 6,
+        name: "Medicine",
+      },
+      message: "Item created successfully",
+    },
+    headers: {
+      "Content-Type": "application/json",
+    },
+  },
+  "PUT /items/{id}": {
+    title: "Update Item",
+    description:
+      "Update existing inventory item details including name, description, price, and category",
+    requestBody: {
+      name: "CocaCola",
+      description: "400ml",
+      price: 150,
+      categoryId: 2,
+    },
+    responseExample: {
+      id: 2,
+      name: "CocaCola",
+      description: "400ml",
+      price: 150.0,
+      category: {
+        id: 2,
+        name: "Beverages",
+      },
+      message: "Item updated successfully",
+    },
+    headers: {
+      "Content-Type": "application/json",
+    },
+  },
+  "DELETE /items/{id}": {
+    title: "Delete Item",
+    description: "Remove an inventory item from the system permanently",
+    requestBody: null,
+    responseExample: {
+      message: "Item deleted successfully",
+      deletedItemId: 4,
+    },
+    headers: {
+      "Content-Type": "application/json",
+    },
+  },
+  "GET /stock": {
+    title: "Get Stock Information",
+    description: "Retrieve current stock levels for all inventory items",
+    requestBody: null,
+    responseExample: [
+      {
+        id: 1,
+        item: {
+          id: 1,
+          name: "Curry Powder",
+          description: "100g",
+          price: 350.0,
+        },
+        qty: 320,
+      },
+      {
+        id: 2,
+        item: {
+          id: 2,
+          name: "CocaCola",
+          description: "400ml",
+          price: 150.0,
+        },
+        qty: 120,
+      },
+    ],
+    headers: {
+      "Content-Type": "application/json",
+    },
+  },
+  "POST /stock": {
+    title: "Create Stock Entry",
+    description: "Create initial stock entry for a new inventory item",
+    requestBody: {
+      itemId: 1,
+      qty: 100,
+    },
+    responseExample: {
+      id: 3,
+      item: {
+        id: 1,
+        name: "Curry Powder",
+        description: "100g",
+        price: 350.0,
+      },
+      qty: 100,
+      message: "Stock entry created successfully",
+    },
+    headers: {
+      "Content-Type": "application/json",
+    },
+  },
+  "PUT /stock/addto": {
+    title: "Add Stock Quantity",
+    description:
+      "Increase stock quantities for multiple items (JWT required for inventory management)",
+    requestBody: [
+      {
+        id: 1,
+        qty: 20,
+      },
+      {
+        id: 2,
+        qty: 100,
+      },
+    ],
+    responseExample: {
+      message: "Stock quantities added successfully",
+      updatedItems: [
+        {
+          id: 1,
+          previousQty: 300,
+          newQty: 320,
+          addedQty: 20,
+        },
+        {
+          id: 2,
+          previousQty: 20,
+          newQty: 120,
+          addedQty: 100,
+        },
+      ],
+    },
+    headers: {
+      Authorization:
+        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ2aWJ1ZGRoYSIsImlhdCI6MTcyOTY3NzMyOCwiZXhwIjoxNzI5NzYzNzI4fQ._fptreCXcwvuUyzUGjO9VJ9BLrf7cgP2xZswL7PlQKo",
+      "Content-Type": "application/json",
+    },
+  },
+  "PUT /stock/getfrom": {
+    title: "Reduce Stock Quantity",
+    description:
+      "Decrease stock quantities for multiple items (JWT required for sales transactions)",
+    requestBody: [
+      {
+        id: 1,
+        qty: 100,
+      },
+      {
+        id: 2,
+        qty: 20,
+      },
+    ],
+    responseExample: {
+      message: "Stock quantities reduced successfully",
+      updatedItems: [
+        {
+          id: 1,
+          previousQty: 320,
+          newQty: 220,
+          reducedQty: 100,
+        },
+        {
+          id: 2,
+          previousQty: 120,
+          newQty: 100,
+          reducedQty: 20,
+        },
+      ],
+    },
+    headers: {
+      Authorization:
+        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ2aWJ1ZGRoYSIsImlhdCI6MTcyOTY3NzMyOCwiZXhwIjoxNzI5NzYzNzI4fQ._fptreCXcwvuUyzUGjO9VJ9BLrf7cgP2xZswL7PlQKo",
+      "Content-Type": "application/json",
+    },
+  },
+  "PUT /stock": {
+    title: "Update Stock Quantity",
+    description: "Set exact stock quantity for a specific item (JWT required)",
+    requestBody: {
+      id: 1,
+      qty: 300,
+    },
+    responseExample: {
+      id: 1,
+      item: {
+        id: 1,
+        name: "Curry Powder",
+        description: "100g",
+        price: 350.0,
+      },
+      qty: 300,
+      message: "Stock quantity updated successfully",
+    },
+    headers: {
+      Authorization:
+        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ2aWJ1ZGRoYSIsImlhdCI6MTcyOTY3NzMyOCwiZXhwIjoxNzI5NzYzNzI4fQ._fptreCXcwvuUyzUGjO9VJ9BLrf7cgP2xZswL7PlQKo",
+      "Content-Type": "application/json",
+    },
+  },
+  "GET /users": {
+    title: "Get All Users",
+    description: "Retrieve all system users for management and administration",
+    requestBody: null,
+    responseExample: [
+      {
+        id: 1,
+        username: "vibuddha",
+        fullname: "Vibuddha Vidarshana",
+        role: "ADMIN",
+      },
+      {
+        id: 2,
+        username: "bvibuddha",
+        fullname: "Vibuddha Vidarshana",
+        role: "USER",
+      },
+    ],
+    headers: {
+      "Content-Type": "application/json",
+    },
+  },
+  "POST /users": {
+    title: "Create New User",
+    description:
+      "Register a new user account with credentials and profile information",
+    requestBody: {
+      username: "bvibuddha",
+      fullname: "Vibuddha Vidarshana",
+      password: "Error@123",
+    },
+    responseExample: {
+      id: 2,
+      username: "bvibuddha",
+      fullname: "Vibuddha Vidarshana",
+      role: "USER",
+      message: "User created successfully",
+    },
+    headers: {
+      "Content-Type": "application/json",
+    },
+  },
+  "GET /orders": {
+    title: "Get All Orders",
+    description:
+      "Retrieve all sales orders with item details and totals (JWT required)",
+    requestBody: null,
+    responseExample: [
+      {
+        id: 1,
+        orderDate: "2024-10-18T10:30:00",
+        items: [
+          {
+            id: 1,
+            name: "Curry Powder",
+            quantity: 3,
+            unitPrice: 350.0,
+            subtotal: 1050.0,
+          },
+          {
+            id: 2,
+            name: "CocaCola",
+            quantity: 2,
+            unitPrice: 150.0,
+            subtotal: 300.0,
+          },
+        ],
+        totalAmount: 1350.0,
+        user: {
+          id: 1,
+          username: "vibuddha",
+          fullname: "Vibuddha Vidarshana",
+        },
+      },
+    ],
+    headers: {
+      Authorization:
+        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ2aWJ1ZGRoYSIsImlhdCI6MTcyOTI3NjkzNiwiZXhwIjoxNzI5MzYzMzM2fQ.Gj_ZTX50ot_tUk9krD190hVLCmD27oKmypvyqem1KTE",
+      "Content-Type": "application/json",
+    },
+  },
+  "POST /orders": {
+    title: "Create Sales Order",
+    description:
+      "Process a new sales transaction with multiple items (JWT required)",
+    requestBody: {
+      itemIds: [1, 1, 1, 2, 2, 3, 3],
+    },
+    responseExample: {
+      id: 2,
+      orderDate: "2024-10-18T14:45:00",
+      items: [
+        {
+          id: 1,
+          name: "Curry Powder",
+          quantity: 3,
+          unitPrice: 350.0,
+          subtotal: 1050.0,
+        },
+        {
+          id: 2,
+          name: "CocaCola",
+          quantity: 2,
+          unitPrice: 150.0,
+          subtotal: 300.0,
+        },
+        {
+          id: 3,
+          name: "Another Item",
+          quantity: 2,
+          unitPrice: 200.0,
+          subtotal: 400.0,
+        },
+      ],
+      totalAmount: 1750.0,
+      message: "Order created successfully",
+      stockUpdated: true,
+    },
+    headers: {
+      Authorization:
+        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ2aWJ1ZGRoYSIsImlhdCI6MTcyOTI3NjkzNiwiZXhwIjoxNzI5MzYzMzM2fQ.Gj_ZTX50ot_tUk9krD190hVLCmD27oKmypvyqem1KTE",
+      "Content-Type": "application/json",
+    },
+  },
+};
+
+// Show API details dialog
+function showApiDialog(method, endpoint, description) {
+  const key = `${method} ${endpoint}`;
+  const details = apiDetails[key] || {
+    title: "API Endpoint",
+    description: description,
+    requestBody: null,
+    responseExample: "Response data",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+
+  const modal = document.createElement("div");
+  modal.className =
+    "fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4 modal-backdrop";
+  modal.addEventListener("click", function (e) {
+    if (e.target === modal) {
+      closeModal();
+    }
+  });
+
+  const dialog = document.createElement("div");
+  dialog.className =
+    "bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl api-modal";
+
+  const methodColor =
+    method === "GET"
+      ? "bg-blue-500"
+      : method === "POST"
+      ? "bg-green-500"
+      : method === "PUT"
+      ? "bg-yellow-500"
+      : method === "DELETE"
+      ? "bg-red-500"
+      : "bg-gray-500";
+
+  dialog.innerHTML = `
+    <div class="sticky top-0 bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between rounded-t-2xl">
+      <div class="flex items-center space-x-3">
+        <span class="px-3 py-1 ${methodColor} text-white text-sm rounded-lg font-mono font-semibold">${method}</span>
+        <h2 class="text-xl font-bold text-gray-800">${details.title}</h2>
+      </div>
+      <button onclick="closeModal()" class="text-gray-400 hover:text-gray-600 text-2xl hover:bg-gray-100 rounded-full w-8 h-8 flex items-center justify-center transition-colors">&times;</button>
+    </div>
+    
+    <div class="p-6 space-y-6">
+      <!-- Endpoint Information -->
+      <div class="bg-gray-50 rounded-lg p-4">
+        <h3 class="font-semibold text-gray-800 mb-2 flex items-center">
+          <i class="fas fa-link text-gray-600 mr-2"></i>
+          Endpoint
+        </h3>
+        <code class="text-sm bg-gray-800 text-green-400 px-3 py-2 rounded block font-mono">
+          ${method} http://127.0.0.1:8085${endpoint}
+        </code>
+        <p class="text-gray-600 mt-2 text-sm">${details.description}</p>
+      </div>
+
+      <!-- Headers -->
+      <div class="bg-blue-50 rounded-lg p-4">
+        <h3 class="font-semibold text-gray-800 mb-3 flex items-center">
+          <i class="fas fa-key text-blue-600 mr-2"></i>
+          Headers
+        </h3>
+        <div class="bg-gray-800 text-green-400 p-3 rounded font-mono text-sm">
+${Object.entries(details.headers)
+  .map(([key, value]) => `          ${key}: ${value}`)
+  .join("\n")}
+        </div>
+      </div>
+
+      ${
+        details.requestBody
+          ? `
+      <!-- Request Body -->
+      <div class="bg-green-50 rounded-lg p-4">
+        <h3 class="font-semibold text-gray-800 mb-3 flex items-center">
+          <i class="fas fa-arrow-up text-green-600 mr-2"></i>
+          Request Body
+        </h3>
+        <div class="bg-gray-800 text-green-400 p-3 rounded font-mono text-sm overflow-x-auto">
+          <pre>${
+            typeof details.requestBody === "string"
+              ? details.requestBody
+              : JSON.stringify(details.requestBody, null, 2)
+          }</pre>
+        </div>
+      </div>
+      `
+          : ""
+      }
+
+      <!-- Response Example -->
+      <div class="bg-purple-50 rounded-lg p-4">
+        <h3 class="font-semibold text-gray-800 mb-3 flex items-center">
+          <i class="fas fa-arrow-down text-purple-600 mr-2"></i>
+          Response Example
+        </h3>
+        <div class="bg-gray-800 text-green-400 p-3 rounded font-mono text-sm overflow-x-auto">
+          <pre>${
+            typeof details.responseExample === "string"
+              ? details.responseExample
+              : JSON.stringify(details.responseExample, null, 2)
+          }</pre>
+        </div>
+      </div>
+
+      <!-- cURL Example -->
+      <div class="bg-orange-50 rounded-lg p-4">
+        <h3 class="font-semibold text-gray-800 mb-3 flex items-center">
+          <i class="fas fa-terminal text-orange-600 mr-2"></i>
+          cURL Example
+        </h3>
+        <div class="bg-gray-800 text-green-400 p-3 rounded font-mono text-sm overflow-x-auto">
+          <pre>curl -X ${method} \\
+${Object.entries(details.headers)
+  .map(([key, value]) => `  -H "${key}: ${value}" \\`)
+  .join("\n")}${
+    details.requestBody && typeof details.requestBody === "object"
+      ? `\n  -d '${JSON.stringify(details.requestBody)}' \\`
+      : ""
+  }
+  http://127.0.0.1:8085${endpoint}</pre>
+        </div>
+      </div>
+
+      <!-- Additional Info -->
+      <div class="bg-yellow-50 rounded-lg p-4">
+        <h3 class="font-semibold text-gray-800 mb-3 flex items-center">
+          <i class="fas fa-info-circle text-yellow-600 mr-2"></i>
+          Additional Information
+        </h3>
+        <div class="text-sm text-gray-600">
+          <p><strong>Base URL:</strong> http://127.0.0.1:8085</p>
+          <p><strong>Authentication:</strong> JWT Bearer Token required for protected endpoints</p>
+          <p><strong>Content-Type:</strong> application/json</p>
+          <p class="mt-2 text-xs text-gray-500">
+            <i class="fas fa-lightbulb mr-1"></i>
+            Click outside the dialog or press Escape to close
+          </p>
+        </div>
+      </div>
+    </div>
+  `;
+
+  modal.appendChild(dialog);
+  document.body.appendChild(modal);
+
+  // Animate in
+  setTimeout(() => {
+    dialog.classList.add("show");
+  }, 10);
+
+  // Store reference for closing
+  window.currentModal = modal;
+
+  // Add keyboard support
+  document.addEventListener("keydown", handleModalKeydown);
+
+  // Prevent body scroll
+  document.body.style.overflow = "hidden";
+}
+
+// Handle keyboard events for modal
+function handleModalKeydown(e) {
+  if (e.key === "Escape") {
+    closeModal();
+  }
+}
+
+// Close modal function
+function closeModal() {
+  const modal = window.currentModal;
+  if (modal) {
+    const dialog = modal.querySelector(".api-modal");
+    dialog.classList.remove("show");
+    setTimeout(() => {
+      modal.remove();
+      window.currentModal = null;
+      document.removeEventListener("keydown", handleModalKeydown);
+      document.body.style.overflow = "";
+    }, 200);
+  }
+}
+
+// Enhanced notification system
+function showNotification(message, type = "info", customContent = null) {
+  const notification = document.createElement("div");
+  notification.className = `fixed top-20 right-6 z-50 p-4 rounded-lg shadow-lg transform translate-x-full transition-transform duration-300 max-w-md ${
+    type === "success"
+      ? "bg-green-500"
+      : type === "error"
+      ? "bg-red-500"
+      : "bg-blue-500"
+  }`;
+
+  if (customContent) {
+    notification.innerHTML = `
+      <div class="text-white font-semibold mb-2">${message}</div>
+      ${customContent}
+    `;
+  } else {
+    notification.textContent = message;
+    notification.style.color = "white";
+  }
+
+  document.body.appendChild(notification);
+
+  // Slide in
+  setTimeout(() => {
+    notification.style.transform = "translateX(0)";
+  }, 100);
+
+  // Slide out and remove
+  setTimeout(
+    () => {
+      notification.style.transform = "translateX(full)";
+      setTimeout(() => {
+        notification.remove();
+      }, 300);
+    },
+    customContent ? 5000 : 3000
+  );
+}
+
+// Performance optimization: Throttle scroll events
+function throttle(func, limit) {
+  let inThrottle;
+  return function () {
+    const args = arguments;
+    const context = this;
+    if (!inThrottle) {
+      func.apply(context, args);
+      inThrottle = true;
+      setTimeout(() => (inThrottle = false), limit);
+    }
+  };
+}
+
+// Feature card click interactions
+document.querySelectorAll(".feature-card").forEach((card) => {
+  card.addEventListener("click", function () {
+    const title = this.querySelector("h3").textContent;
+    const description = this.querySelector("p").textContent;
+
+    showNotification(
+      `Feature: ${title}`,
+      "info",
+      `
+      <div class="bg-white/10 p-3 rounded mt-2">
+        <p class="text-white/90 text-sm">${description}</p>
+      </div>
+    `
+    );
+  });
+});
+
+// Easter egg: Nexivus developer info
+let clickCount = 0;
+document.querySelector("h1").addEventListener("click", function () {
+  clickCount++;
+  if (clickCount === 5) {
+    showNotification(
+      "🚀 Nexivus POS System Developer",
+      "success",
+      `
+      <div class="bg-white/10 p-3 rounded mt-2">
+        <p class="text-white/90 text-sm">
+          Built with passion for retail technology!<br>
+          Features: JWT Auth, Inventory Management, POS Operations<br>
+          Stack: Spring Boot, MySQL, JPA/Hibernate
+        </p>
+      </div>
+    `
+    );
+    clickCount = 0;
+  }
+});
+
+// Console welcome message
+console.log(`
+🚀 Welcome to Nexivus POS System!
+Built with Spring Boot + Modern Architecture
+
+Features:
+• Secure JWT authentication system
+• Complete inventory management
+• Point of sale operations
+• User management with roles
+• Secure RESTful API endpoints
+• JPA/Hibernate with MySQL integration
+
+Architecture:
+• Spring Security for authentication & authorization
+• BCrypt password encryption
+• CORS configuration for cross-origin requests
+• Organized service layer architecture
+• Role-based method security
+
+Click on any feature card or API endpoint to explore more!
+`);
+
+// Export functions for global access
+window.closeMobileMenu = closeMobileMenu;
 
 // Navigation functionality
 function initNavigation() {
@@ -888,3 +1936,231 @@ function showNotification(message, type = "info") {
 }
 
 console.log("🚀 Nexivus Interactive Features Loaded Successfully!");
+
+// Enhanced functions from project3 for consistency
+
+// Enhanced typewriter effect
+function initTypewriterEffect() {
+  const typewriterText = document.querySelector(".typing-animation");
+  if (!typewriterText) return;
+
+  const phrases = [
+    "Built with React & Vite",
+    "Modern UI Components",
+    "Real-time Inventory",
+    "User Management System",
+    "RESTful API Integration",
+    "Nexivus Inventory System",
+  ];
+
+  let currentPhrase = 0;
+  let currentChar = 0;
+  let isDeleting = false;
+
+  function typeWriter() {
+    const current = phrases[currentPhrase];
+
+    if (isDeleting) {
+      typewriterText.textContent = current.substring(0, currentChar - 1);
+      currentChar--;
+    } else {
+      typewriterText.textContent = current.substring(0, currentChar + 1);
+      currentChar++;
+    }
+
+    let typeSpeed = isDeleting ? 100 : 150;
+
+    if (!isDeleting && currentChar === current.length) {
+      typeSpeed = 2000; // Pause at end
+      isDeleting = true;
+    } else if (isDeleting && currentChar === 0) {
+      isDeleting = false;
+      currentPhrase = (currentPhrase + 1) % phrases.length;
+      typeSpeed = 500;
+    }
+
+    setTimeout(typeWriter, typeSpeed);
+  }
+
+  // Start typewriter after initial animation
+  setTimeout(typeWriter, 3500);
+}
+
+// Code animation display
+function initCodeAnimation() {
+  const codeDisplay = document.getElementById("code-display");
+  if (!codeDisplay) return;
+
+  const codeLines = [
+    "const [inventory, setInventory] = useState([]);",
+    "",
+    "const fetchInventory = async () => {",
+    "  try {",
+    '    const response = await fetch("/inventory", {',
+    "      headers: {",
+    '        "Authorization": `Bearer ${token}`,',
+    '        "Content-Type": "application/json"',
+    "      }",
+    "    });",
+    "    const data = await response.json();",
+    "    setInventory(data);",
+    "  } catch (error) {",
+    '    console.error("Error fetching inventory:", error);',
+    "  }",
+    "};",
+  ];
+
+  let currentLine = 0;
+  function displayNextLine() {
+    if (currentLine < codeLines.length) {
+      const lineElement = document.createElement("div");
+      lineElement.className = "code-line text-xs sm:text-sm";
+      lineElement.textContent = codeLines[currentLine];
+
+      // Color coding for different elements
+      if (
+        codeLines[currentLine].includes("const") ||
+        codeLines[currentLine].includes("async") ||
+        codeLines[currentLine].includes("await")
+      ) {
+        lineElement.classList.add("text-purple-400");
+      } else if (
+        codeLines[currentLine].includes("fetch") ||
+        codeLines[currentLine].includes("response") ||
+        codeLines[currentLine].includes("error")
+      ) {
+        lineElement.classList.add("text-blue-400");
+      } else if (
+        codeLines[currentLine].includes("try") ||
+        codeLines[currentLine].includes("catch")
+      ) {
+        lineElement.classList.add("text-yellow-400");
+      } else {
+        lineElement.classList.add("text-green-300");
+      }
+
+      codeDisplay.appendChild(lineElement);
+      currentLine++;
+      setTimeout(displayNextLine, 120);
+    }
+  }
+
+  setTimeout(displayNextLine, 1000);
+}
+
+// Scroll animations with Intersection Observer
+function initScrollAnimations() {
+  const observerOptions = {
+    threshold: 0.15,
+    rootMargin: "0px 0px -50px 0px",
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("animate-fade-in-up");
+        if (entry.target.classList.contains("feature-card")) {
+          entry.target.style.animationDelay = `${Math.random() * 0.5}s`;
+        }
+      }
+    });
+  }, observerOptions);
+
+  // Observe cards and sections for animation
+  document
+    .querySelectorAll(".feature-card, .tech-category, .api-section")
+    .forEach((el) => {
+      observer.observe(el);
+    });
+}
+
+// Interactive button effects
+function initInteractiveButtons() {
+  const buttons = document.querySelectorAll("button, .btn");
+
+  buttons.forEach((btn) => {
+    btn.addEventListener("mouseenter", function () {
+      this.style.transform = "translateY(-2px)";
+      this.style.boxShadow = "0 8px 25px rgba(0,0,0,0.15)";
+    });
+
+    btn.addEventListener("mouseleave", function () {
+      this.style.transform = "translateY(0)";
+      this.style.boxShadow = "none";
+    });
+  });
+}
+
+// Parallax effects for enhanced user experience
+function initParallaxEffects() {
+  window.addEventListener("scroll", () => {
+    const scrolled = window.pageYOffset;
+    const parallax = document.querySelector(".floating");
+
+    if (parallax) {
+      const speed = scrolled * 0.5;
+      parallax.style.transform = `translateY(${speed}px)`;
+    }
+  });
+}
+
+// Tech badge hover effects
+function initTechBadgeEffects() {
+  const techBadges = document.querySelectorAll(".tech-badge");
+
+  techBadges.forEach((badge) => {
+    badge.addEventListener("mouseenter", function () {
+      this.style.transform = "scale(1.05) translateY(-2px)";
+      this.style.boxShadow = "0 10px 20px rgba(0,0,0,0.2)";
+    });
+
+    badge.addEventListener("mouseleave", function () {
+      this.style.transform = "scale(1) translateY(0)";
+      this.style.boxShadow = "none";
+    });
+
+    // Add click event for tech badge interaction
+    badge.addEventListener("click", function () {
+      const techName = this.textContent.trim();
+      showNotification(`Learning more about ${techName}...`, "info");
+    });
+  });
+}
+
+// API endpoint hover effects
+function initApiEndpointEffects() {
+  const apiEndpoints = document.querySelectorAll(".api-endpoint");
+
+  apiEndpoints.forEach((endpoint) => {
+    endpoint.addEventListener("mouseenter", function () {
+      this.style.backgroundColor = "rgba(59, 130, 246, 0.05)";
+      this.style.transform = "translateX(8px)";
+      this.style.paddingLeft = "20px";
+      this.style.borderLeft = "3px solid #3b82f6";
+    });
+
+    endpoint.addEventListener("mouseleave", function () {
+      this.style.backgroundColor = "transparent";
+      this.style.transform = "translateX(0)";
+      this.style.paddingLeft = "16px";
+      this.style.borderLeft = "1px solid #e5e7eb";
+    });
+  });
+}
+
+// Performance optimization: Throttle scroll events
+function throttle(func, limit) {
+  let inThrottle;
+  return function () {
+    const args = arguments;
+    const context = this;
+    if (!inThrottle) {
+      func.apply(context, args);
+      inThrottle = true;
+      setTimeout(() => (inThrottle = false), limit);
+    }
+  };
+}
+
+// Export functions for global access
+window.closeMobileMenu = closeMobileMenu;

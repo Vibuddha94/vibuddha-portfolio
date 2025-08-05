@@ -1,4 +1,4 @@
-// Nexivus Frontend Showcase - Interactive JavaScript
+// Nexivus Frontend Project Page - Interactive JavaScript
 // Enhanced with modern ES6+ features and smooth animations
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -10,6 +10,8 @@ document.addEventListener("DOMContentLoaded", function () {
   initInteractiveButtons();
   initParallaxEffects();
   initTypewriterEffect();
+  initTechBadgeEffects();
+  initApiEndpointEffects();
 });
 
 // Enhanced typewriter effect
@@ -18,12 +20,12 @@ function initTypewriterEffect() {
   if (!typewriterText) return;
 
   const phrases = [
-    "Built with Vite for Speed",
-    "Modern UI with Tailwind CSS",
-    "Interactive Features",
-    "Responsive Design for All Devices",
-    "Optimized for Performance",
-    "React + TypeScript Frontend",
+    "Built with React 18",
+    "TypeScript Integration",
+    "Modern UI Components",
+    "Responsive Design",
+    "Vite Build System",
+    "React TypeScript Application",
   ];
 
   let currentPhrase = 0;
@@ -59,8 +61,7 @@ function initTypewriterEffect() {
   setTimeout(typeWriter, 3500);
 }
 
-// Mobile Menu Functionality
-// Mobile menu functionality
+// Enhanced mobile menu functionality
 function initMobileMenu() {
   const mobileMenuBtn = document.getElementById("mobile-menu-toggle");
   const nav = document.querySelector("nav");
@@ -90,11 +91,13 @@ function initMobileMenu() {
     });
   }
 }
+
 // Close mobile menu when clicking outside
 function closeMobileMenu() {
   const mobileMenu = document.getElementById("mobile-menu");
   const nav = document.querySelector("nav");
   const icon = document.querySelector("#mobile-menu-toggle i");
+
   if (mobileMenu) {
     mobileMenu.classList.add("hidden");
     mobileMenu.classList.remove("flex");
@@ -102,269 +105,161 @@ function closeMobileMenu() {
     nav.classList.add("glass-effect");
     icon.classList.remove("fa-times");
     icon.classList.add("fa-bars");
-    initMobileMenu(); // Reset state
   }
 }
 
-// Smooth Scrolling for Navigation Links
+// Smooth scrolling for navigation links
 function initSmoothScrolling() {
-  const navLinks = document.querySelectorAll('a[href^="#"]');
-
-  navLinks.forEach((link) => {
-    link.addEventListener("click", function (e) {
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener("click", function (e) {
       e.preventDefault();
-
-      const targetId = this.getAttribute("href");
-      const targetSection = document.querySelector(targetId);
-
-      if (targetSection) {
-        const navHeight = document.querySelector("nav").offsetHeight;
-        const targetPosition = targetSection.offsetTop - navHeight - 20;
-
-        window.scrollTo({
-          top: targetPosition,
+      const target = document.querySelector(this.getAttribute("href"));
+      if (target) {
+        target.scrollIntoView({
           behavior: "smooth",
+          block: "start",
         });
-
-        // Close mobile menu if open
-        closeMobileMenu();
       }
     });
   });
 }
 
-// Animated Code Display
+// Code animation display
 function initCodeAnimation() {
   const codeDisplay = document.getElementById("code-display");
+  if (!codeDisplay) return;
 
-  if (codeDisplay) {
-    const codeLines = [
-      'import React from "react";',
-      'import { useState, useEffect } from "react";',
-      'import axios from "axios";',
-      "",
-      "const App: React.FC = () => {",
-      "  const [data, setData] = useState([]);",
-      "  const [loading, setLoading] = useState(true);",
-      "",
-      "  useEffect(() => {",
-      "    fetchData();",
-      "  }, []);",
-      "",
-      "  const fetchData = async () => {",
-      "    try {",
-      '      const response = await axios.get("/api/items");',
-      "      setData(response.data);",
-      "      setLoading(false);",
-      "    } catch (error) {",
-      '      console.error("Error:", error);',
-      "    }",
-      "  };",
-      "",
-      "  return (",
-      '    <div className="app">',
-      "      <h1>Nexivus Frontend</h1>",
-      "      {loading ? <Spinner /> : <ItemList data={data} />}",
-      "    </div>",
-      "  );",
-      "};",
-      "",
-      "export default App;",
-    ];
+  const codeLines = [
+    'import React, { useState, useEffect } from "react";',
+    'import { BrowserRouter, Routes, Route } from "react-router-dom";',
+    "",
+    "const Dashboard: React.FC = () => {",
+    "  const [inventory, setInventory] = useState<Item[]>([]);",
+    "  const [loading, setLoading] = useState(true);",
+    "",
+    "  useEffect(() => {",
+    "    fetchInventory();",
+    "  }, []);",
+    "",
+    "  const fetchInventory = async () => {",
+    "    try {",
+    "      const response = await apiService.getInventory();",
+    "      setInventory(response.data);",
+    "    } catch (error) {",
+    '      console.error("Error:", error);',
+    "    } finally {",
+    "      setLoading(false);",
+    "    }",
+    "  };",
+    "",
+    "  return <InventoryGrid items={inventory} />;",
+    "};",
+  ];
 
-    let currentLine = 0;
+  let currentLine = 0;
+  function displayNextLine() {
+    if (currentLine < codeLines.length) {
+      const lineElement = document.createElement("div");
+      lineElement.className = "code-line text-xs sm:text-sm";
+      lineElement.textContent = codeLines[currentLine];
 
-    function displayNextLine() {
-      if (currentLine < codeLines.length) {
-        const lineElement = document.createElement("div");
-        lineElement.textContent = codeLines[currentLine];
-        lineElement.style.opacity = "0";
-        lineElement.style.transform = "translateX(-10px)";
-        lineElement.style.transition = "all 0.3s ease";
-
-        codeDisplay.appendChild(lineElement);
-
-        // Animate in
-        setTimeout(() => {
-          lineElement.style.opacity = "1";
-          lineElement.style.transform = "translateX(0)";
-        }, 50);
-
-        currentLine++;
-
-        // Continue with next line
-        setTimeout(displayNextLine, 150);
+      // Color coding for different elements
+      if (
+        codeLines[currentLine].includes("import") ||
+        codeLines[currentLine].includes("export") ||
+        codeLines[currentLine].includes("const") ||
+        codeLines[currentLine].includes("return")
+      ) {
+        lineElement.classList.add("text-purple-400");
+      } else if (
+        codeLines[currentLine].includes("React") ||
+        codeLines[currentLine].includes("useState") ||
+        codeLines[currentLine].includes("useEffect")
+      ) {
+        lineElement.classList.add("text-blue-400");
+      } else if (
+        codeLines[currentLine].includes("async") ||
+        codeLines[currentLine].includes("await") ||
+        codeLines[currentLine].includes("try") ||
+        codeLines[currentLine].includes("catch")
+      ) {
+        lineElement.classList.add("text-yellow-400");
       } else {
-        // Restart animation after delay
-        setTimeout(() => {
-          codeDisplay.innerHTML = "";
-          currentLine = 0;
-          setTimeout(displayNextLine, 1000);
-        }, 5000);
+        lineElement.classList.add("text-green-300");
       }
-    }
 
-    // Start the animation
-    setTimeout(displayNextLine, 2000);
+      codeDisplay.appendChild(lineElement);
+      currentLine++;
+      setTimeout(displayNextLine, 120);
+    }
   }
+
+  setTimeout(displayNextLine, 1000);
 }
 
-// Scroll-triggered Animations
+// Scroll animations with Intersection Observer
 function initScrollAnimations() {
   const observerOptions = {
-    threshold: 0.1,
+    threshold: 0.15,
     rootMargin: "0px 0px -50px 0px",
   };
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        entry.target.classList.add("slide-in");
-
-        // Add staggered animation for feature cards
+        entry.target.classList.add("animate-fade-in-up");
         if (entry.target.classList.contains("feature-card")) {
-          const cards =
-            entry.target.parentElement.querySelectorAll(".feature-card");
-          cards.forEach((card, index) => {
-            setTimeout(() => {
-              card.style.animationDelay = `${index * 0.1}s`;
-              card.classList.add("slide-in");
-            }, index * 100);
-          });
+          entry.target.style.animationDelay = `${Math.random() * 0.5}s`;
         }
       }
     });
   }, observerOptions);
 
-  // Observe all animatable elements
-  const animatableElements = document.querySelectorAll(
-    ".feature-card, .modern-card, .tech-category"
-  );
-  animatableElements.forEach((el) => observer.observe(el));
+  // Observe cards and sections for animation
+  document
+    .querySelectorAll(".feature-card, .tech-category, .api-section")
+    .forEach((el) => {
+      observer.observe(el);
+    });
 }
 
-// Interactive Button Effects
+// Interactive button effects
 function initInteractiveButtons() {
-  const interactiveButtons = document.querySelectorAll(".interactive-demo");
+  const buttons = document.querySelectorAll("button, .btn");
 
-  interactiveButtons.forEach((button) => {
-    button.addEventListener("click", function (e) {
-      // Create ripple effect
-      const ripple = document.createElement("span");
-      const rect = this.getBoundingClientRect();
-      const size = Math.max(rect.width, rect.height);
-      const x = e.clientX - rect.left - size / 2;
-      const y = e.clientY - rect.top - size / 2;
+  buttons.forEach((btn) => {
+    btn.addEventListener("mouseenter", function () {
+      this.style.transform = "translateY(-2px)";
+      this.style.boxShadow = "0 8px 25px rgba(0,0,0,0.15)";
+    });
 
-      ripple.style.cssText = `
-                position: absolute;
-                width: ${size}px;
-                height: ${size}px;
-                left: ${x}px;
-                top: ${y}px;
-                background: rgba(255,255,255,0.5);
-                border-radius: 50%;
-                transform: scale(0);
-                animation: ripple 0.6s linear;
-                pointer-events: none;
-            `;
-
-      this.style.position = "relative";
-      this.style.overflow = "hidden";
-      this.appendChild(ripple);
-
-      setTimeout(() => {
-        ripple.remove();
-      }, 600);
-
-      // Simulate demo interaction
-      showDemoNotification();
+    btn.addEventListener("mouseleave", function () {
+      this.style.transform = "translateY(0)";
+      this.style.boxShadow = "none";
     });
   });
-
-  // Add CSS for ripple animation
-  const style = document.createElement("style");
-  style.textContent = `
-        @keyframes ripple {
-            to {
-                transform: scale(4);
-                opacity: 0;
-            }
-        }
-    `;
-  document.head.appendChild(style);
 }
 
-// Demo Notification
-function showDemoNotification() {
-  // Create notification
-  const notification = document.createElement("div");
-  notification.className =
-    "fixed top-4 right-4 bg-blue-600 text-white px-6 py-3 rounded-lg shadow-lg z-50 transform translate-x-full transition-transform duration-300";
-  notification.innerHTML = `
-        <div class="flex items-center space-x-2">
-            <i class="fas fa-rocket"></i>
-            <span>Demo would launch here! 🚀</span>
-            <button onclick="this.parentElement.parentElement.remove()" class="ml-2 text-blue-200 hover:text-white">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>
-    `;
-
-  document.body.appendChild(notification);
-
-  // Animate in
-  setTimeout(() => {
-    notification.classList.remove("translate-x-full");
-  }, 100);
-
-  // Auto remove after 3 seconds
-  setTimeout(() => {
-    if (document.body.contains(notification)) {
-      notification.classList.add("translate-x-full");
-      setTimeout(() => {
-        notification.remove();
-      }, 300);
-    }
-  }, 3000);
-}
-
-// Parallax Effects
+// Parallax effects for enhanced user experience
 function initParallaxEffects() {
-  let ticking = false;
-
-  function updateParallax() {
+  window.addEventListener("scroll", () => {
     const scrolled = window.pageYOffset;
-    const parallaxElements = document.querySelectorAll(".floating");
+    const parallax = document.querySelector(".floating");
 
-    parallaxElements.forEach((element) => {
-      const speed = 0.5;
-      const yPos = -(scrolled * speed);
-      element.style.transform = `translate3d(0, ${yPos}px, 0)`;
-    });
-
-    ticking = false;
-  }
-
-  function requestTick() {
-    if (!ticking) {
-      requestAnimationFrame(updateParallax);
-      ticking = true;
+    if (parallax) {
+      const speed = scrolled * 0.5;
+      parallax.style.transform = `translateY(${speed}px)`;
     }
-  }
-
-  window.addEventListener("scroll", requestTick);
+  });
 }
 
-// Navbar scroll effect
+// Navigation scroll effect
 window.addEventListener("scroll", function () {
   const nav = document.querySelector("nav");
-  const scrolled = window.pageYOffset;
-
-  if (scrolled > 50) {
+  if (window.scrollY > 50) {
     nav.style.background = "rgba(255, 255, 255, 0.95)";
     nav.style.backdropFilter = "blur(20px)";
-    nav.style.boxShadow = "0 4px 6px -1px rgba(0, 0, 0, 0.1)";
+    nav.style.boxShadow = "0 2px 20px rgba(0,0,0,0.1)";
   } else {
     nav.style.background = "rgba(255, 255, 255, 0.1)";
     nav.style.backdropFilter = "blur(10px)";
@@ -373,10 +268,8 @@ window.addEventListener("scroll", function () {
 });
 
 // Tech badge hover effects
-document.addEventListener("DOMContentLoaded", function () {
-  const techBadges = document.querySelectorAll(
-    ".tech-badge, .react-badge, .vite-badge, .typescript-badge, .tailwind-badge"
-  );
+function initTechBadgeEffects() {
+  const techBadges = document.querySelectorAll(".tech-badge");
 
   techBadges.forEach((badge) => {
     badge.addEventListener("mouseenter", function () {
@@ -388,11 +281,17 @@ document.addEventListener("DOMContentLoaded", function () {
       this.style.transform = "scale(1) translateY(0)";
       this.style.boxShadow = "none";
     });
+
+    // Add click event for tech badge interaction
+    badge.addEventListener("click", function () {
+      const techName = this.textContent.trim();
+      showNotification(`Learning more about ${techName}...`, "info");
+    });
   });
-});
+}
 
 // API endpoint hover effects
-document.addEventListener("DOMContentLoaded", function () {
+function initApiEndpointEffects() {
   const apiEndpoints = document.querySelectorAll(".api-endpoint");
 
   apiEndpoints.forEach((endpoint) => {
@@ -400,15 +299,79 @@ document.addEventListener("DOMContentLoaded", function () {
       this.style.backgroundColor = "rgba(59, 130, 246, 0.05)";
       this.style.transform = "translateX(8px)";
       this.style.paddingLeft = "20px";
+      this.style.borderLeft = "3px solid #3b82f6";
     });
 
     endpoint.addEventListener("mouseleave", function () {
       this.style.backgroundColor = "transparent";
       this.style.transform = "translateX(0)";
       this.style.paddingLeft = "16px";
+      this.style.borderLeft = "1px solid #e5e7eb";
+    });
+
+    // Add click event for API endpoint demonstration
+    endpoint.addEventListener("click", function () {
+      const method = this.querySelector("span")?.textContent || "GET";
+      const endpoint = this.querySelector("code")?.textContent || "/api";
+      showApiDemo(method, endpoint);
     });
   });
-});
+}
+
+// Show API demonstration
+function showApiDemo(method, endpoint) {
+  const demoContent = `
+    <div class="bg-gray-800 text-green-400 p-4 rounded-lg font-mono text-sm">
+      <div class="text-yellow-400 mb-2">$ curl -X ${method} \\</div>
+      <div class="text-blue-400 mb-2">  -H "Authorization: Bearer jwt_token" \\</div>
+      <div class="text-purple-400 mb-2">  -H "Content-Type: application/json" \\</div>
+      <div class="text-white">  http://localhost:3000${endpoint}</div>
+      <div class="mt-3 text-gray-400">// Example API call for ${endpoint}</div>
+    </div>
+  `;
+
+  showNotification(`API Demo: ${method} ${endpoint}`, "success", demoContent);
+}
+
+// Enhanced notification system
+function showNotification(message, type = "info", customContent = null) {
+  const notification = document.createElement("div");
+  notification.className = `fixed top-20 right-6 z-50 p-4 rounded-lg shadow-lg transform translate-x-full transition-transform duration-300 max-w-md ${
+    type === "success"
+      ? "bg-green-500"
+      : type === "error"
+      ? "bg-red-500"
+      : "bg-blue-500"
+  }`;
+
+  if (customContent) {
+    notification.innerHTML = `
+      <div class="text-white font-semibold mb-2">${message}</div>
+      ${customContent}
+    `;
+  } else {
+    notification.textContent = message;
+    notification.style.color = "white";
+  }
+
+  document.body.appendChild(notification);
+
+  // Slide in
+  setTimeout(() => {
+    notification.style.transform = "translateX(0)";
+  }, 100);
+
+  // Slide out and remove
+  setTimeout(
+    () => {
+      notification.style.transform = "translateX(full)";
+      setTimeout(() => {
+        notification.remove();
+      }, 300);
+    },
+    customContent ? 5000 : 3000
+  );
+}
 
 // Performance optimization: Throttle scroll events
 function throttle(func, limit) {
@@ -424,42 +387,49 @@ function throttle(func, limit) {
   };
 }
 
-// Easter egg: Konami code
-(function () {
-  const konamiCode = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65];
-  let userInput = [];
+// Feature card click interactions
+document.querySelectorAll(".feature-card").forEach((card) => {
+  card.addEventListener("click", function () {
+    const title = this.querySelector("h3")?.textContent || "Feature";
+    const description = this.querySelector("p")?.textContent || "Description";
 
-  document.addEventListener("keydown", function (e) {
-    userInput.push(e.keyCode);
-    userInput = userInput.slice(-konamiCode.length);
-
-    if (userInput.join(",") === konamiCode.join(",")) {
-      // Easter egg activated!
-      const body = document.body;
-      body.style.animation = "rainbow 2s infinite";
-
-      const style = document.createElement("style");
-      style.textContent = `
-                @keyframes rainbow {
-                    0% { filter: hue-rotate(0deg); }
-                    100% { filter: hue-rotate(360deg); }
-                }
-            `;
-      document.head.appendChild(style);
-
-      setTimeout(() => {
-        body.style.animation = "";
-        style.remove();
-      }, 5000);
-
-      showDemoNotification();
-    }
+    showNotification(
+      `Feature: ${title}`,
+      "info",
+      `
+      <div class="bg-white/10 p-3 rounded mt-2">
+        <p class="text-white/90 text-sm">${description}</p>
+      </div>
+    `
+    );
   });
-})();
+});
+
+// Easter egg: Nexivus Frontend developer info
+let clickCount = 0;
+document.querySelector("h1")?.addEventListener("click", function () {
+  clickCount++;
+  if (clickCount === 5) {
+    showNotification(
+      "⚛️ Nexivus Frontend Developer",
+      "success",
+      `
+      <div class="bg-white/10 p-3 rounded mt-2">
+        <p class="text-white/90 text-sm">
+          Built with modern React ecosystem!<br>
+          Features: TypeScript, Vite, Tailwind CSS, Modern Hooks<br>
+          Stack: React 18, TypeScript, Vite, Tailwind CSS
+        </p>
+      </div>
+    `
+    );
+    clickCount = 0;
+  }
+});
 
 // Console welcome message
 console.log(`
-🚀 Welcome to Nexivus Frontend!
+⚛️ Welcome to Nexivus Frontend!
 Built with React 18 + TypeScript + Vite
 
 Features:
@@ -468,9 +438,38 @@ Features:
 • Lightning-fast builds with Vite
 • Responsive design with Tailwind CSS
 • Smooth animations and interactions
+• Component-based architecture
 
-Try the Konami Code for a surprise! ⬆⬆⬇⬇⬅➡⬅➡BA
+Architecture:
+• React 18 with modern hooks (useState, useEffect, useContext)
+• TypeScript for type safety
+• Vite for fast development and building
+• Tailwind CSS for styling
+• Component-based modular design
+
+Click on any feature card or component to explore more!
 `);
 
 // Export functions for global access
 window.closeMobileMenu = closeMobileMenu;
+
+// Add loading animation
+window.addEventListener("load", () => {
+  const loader = document.createElement("div");
+  loader.className =
+    "fixed inset-0 bg-white flex items-center justify-center z-50";
+  loader.innerHTML = `
+        <div class="text-center">
+            <div class="w-16 h-16 border-4 border-purple-200 border-t-purple-600 rounded-full animate-spin mb-4"></div>
+            <p class="text-gray-600 font-medium">Loading Nexivus Frontend...</p>
+        </div>
+    `;
+
+  document.body.appendChild(loader);
+
+  setTimeout(() => {
+    loader.style.opacity = "0";
+    loader.style.transition = "opacity 0.5s ease";
+    setTimeout(() => loader.remove(), 500);
+  }, 1000);
+});
