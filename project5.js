@@ -143,19 +143,10 @@ function initCodeAnimation() {
     "  startTimer();",
     "}",
     "",
-    "function displayQuestion() {",
-    "  const question = quiz.questions[quiz.currentQuestion];",
-    '  document.getElementById("question").textContent = question.text;',
-    "  renderOptions(question.options);",
-    "}",
-    "",
-    "function checkAnswer(selectedOption) {",
+    "function checkAnswer(selected) {",
     "  const correct = quiz.questions[quiz.currentQuestion].correct;",
-    "  if (selectedOption === correct) {",
+    "  if (selected === correct) {",
     "    quiz.score++;",
-    '    showFeedback("Correct!", "success");',
-    "  } else {",
-    '    showFeedback("Wrong answer!", "error");',
     "  }",
     "  nextQuestion();",
     "}",
@@ -194,7 +185,7 @@ function initCodeAnimation() {
 
       codeDisplay.appendChild(lineElement);
       currentLine++;
-      setTimeout(displayNextLine, 120);
+      setTimeout(displayNextLine, 80);
     }
   }
 
