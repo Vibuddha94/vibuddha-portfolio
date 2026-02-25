@@ -197,7 +197,6 @@ function initializeContactForm() {
       e.preventDefault();
 
       // Get form data
-      const formData = new FormData(form);
       const name = form.querySelector('input[type="text"]').value;
       const email = form.querySelector('input[type="email"]').value;
       const message = form.querySelector("textarea").value;
@@ -214,6 +213,19 @@ function initializeContactForm() {
 
       submitBtn.textContent = "Sending...";
       submitBtn.disabled = true;
+
+      if (
+        typeof window.emailjs === "undefined" ||
+        typeof window.emailjs.send !== "function"
+      ) {
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+        showNotification(
+          "Email service is not available right now. Please try again shortly.",
+          "error"
+        );
+        return;
+      }
 
       emailjs
         .send("service_kuhcvag", "template_6vnjjdi", {
@@ -232,9 +244,10 @@ function initializeContactForm() {
           (error) => {
             submitBtn.textContent = originalText;
             submitBtn.disabled = false;
-            showNotification("Error sending message!", "error");
-            console.error("Error sending email:", error);
-            form.reset();
+            showNotification(
+              "Unable to send now. Please try again in a moment.",
+              "error"
+            );
           }
         );
     });

@@ -41,7 +41,7 @@ export default function LegacyHtmlPage({ markup }: LegacyHtmlPageProps) {
             if (!src.startsWith("/legacy-scripts/")) {
               continue;
             }
-            const response = await fetch(src);
+            const response = await fetch(src, { cache: "no-store" });
             code = await response.text();
           }
 
@@ -64,13 +64,49 @@ export default function LegacyHtmlPage({ markup }: LegacyHtmlPageProps) {
       if (navLinks.length === 0) return;
 
       const setActiveLink = (activeLink: HTMLAnchorElement | null) => {
+        const activeHref = activeLink?.getAttribute("href") ?? null;
         navLinks.forEach((link) => {
-          const isActive = link === activeLink;
+          const isActive =
+            !!activeHref && link.getAttribute("href") === activeHref;
           link.classList.toggle("is-active", isActive);
           if (isActive) {
             link.setAttribute("aria-current", "page");
+            link.style.setProperty(
+              "background",
+              "rgba(242, 248, 239, 0.24)",
+              "important"
+            );
+            link.style.setProperty("color", "#f2f8ef", "important");
+            link.style.setProperty("border-radius", "999px", "important");
+            link.style.setProperty("padding-inline", "0.85rem", "important");
+            link.style.setProperty("font-weight", "800", "important");
+            link.style.setProperty("text-decoration", "underline", "important");
+            link.style.setProperty(
+              "text-decoration-thickness",
+              "2px",
+              "important"
+            );
+            link.style.setProperty(
+              "text-underline-offset",
+              "4px",
+              "important"
+            );
+            link.style.setProperty(
+              "box-shadow",
+              "inset 0 0 0 1px rgba(242, 248, 239, 0.35), 0 0 0 1px rgba(242, 248, 239, 0.2)",
+              "important"
+            );
           } else {
             link.removeAttribute("aria-current");
+            link.style.removeProperty("background");
+            link.style.removeProperty("color");
+            link.style.removeProperty("border-radius");
+            link.style.removeProperty("padding-inline");
+            link.style.removeProperty("font-weight");
+            link.style.removeProperty("text-decoration");
+            link.style.removeProperty("text-decoration-thickness");
+            link.style.removeProperty("text-underline-offset");
+            link.style.removeProperty("box-shadow");
           }
         });
       };

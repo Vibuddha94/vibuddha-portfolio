@@ -1,14 +1,14 @@
 export type LegacyPageKey =
-  | 'home'
-  | 'nexivus-pos-backend'
-  | 'nexivus-pos-frontend'
-  | 'course-management-backend'
-  | 'course-management-frontend'
-  | 'quiz-web-app'
-  | 'nic-detail-extractor'
+    | 'home'
+    | 'nexivus-pos-backend'
+    | 'nexivus-pos-frontend'
+    | 'course-management-backend'
+    | 'course-management-frontend'
+    | 'quiz-web-app'
+    | 'nic-detail-extractor'
 
 export const LEGACY_PAGE_MARKUP: Record<LegacyPageKey, string> = {
-  'home': String.raw`<!-- Navigation -->
+    'home': String.raw`<!-- Navigation -->
     <nav class="fixed top-0 left-0 right-0 z-50 glass-effect">
         <div class="container mx-auto px-4 sm:px-6 py-4">
             <div class="flex justify-between items-center">
@@ -37,7 +37,7 @@ export const LEGACY_PAGE_MARKUP: Record<LegacyPageKey, string> = {
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="min-h-screen flex items-center justify-center relative overflow-hidden pt-16 sm:pt-0">
+    <section id="home" class="flex items-center justify-center relative overflow-hidden pt-32 border-none">
         <div class="absolute inset-0 animate-gradient opacity-20"></div>
         <div class="absolute inset-0 bg-gray-900 bg-opacity-80"></div>
 
@@ -64,7 +64,7 @@ export const LEGACY_PAGE_MARKUP: Record<LegacyPageKey, string> = {
                     Crafting beautiful and functional web experiences with a focus on performance and user
                     engagement. Passionate about modern web technologies and creating seamless digital journeys.
                 </p>
-                <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center animate-fade-in-up max-w-md sm:max-w-none mx-auto sm:h-20 h-40 items-center"
+                <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center animate-fade-in-up max-w-md sm:max-w-none mx-auto sm:h-30 h-40 items-center"
                     style="animation-delay: 0.6s;">
                     <a href="#projects" class="nav-item">
                         <button
@@ -84,7 +84,7 @@ export const LEGACY_PAGE_MARKUP: Record<LegacyPageKey, string> = {
     </section>
 
     <!-- About Section -->
-    <section id="about" class="py-12 sm:py-16 lg:py-20 bg-gray-800">
+    <section id="about" class="py-12 sm:py-16 lg:py-20 border-none">
         <div class="container mx-auto px-4 sm:px-6">
             <div class="text-center mb-12 sm:mb-16">
                 <h2
@@ -127,7 +127,7 @@ export const LEGACY_PAGE_MARKUP: Record<LegacyPageKey, string> = {
                     </p>
 
                     <!-- Skills -->
-                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4 py-4 sm:py-6">
                         <div
                             class="skill-item bg-gradient-to-br from-orange-500 to-red-500 p-3 sm:p-4 rounded-lg text-center font-semibold text-sm sm:text-base">
                             Spring Boot
@@ -159,7 +159,7 @@ export const LEGACY_PAGE_MARKUP: Record<LegacyPageKey, string> = {
     </section>
 
     <!-- Projects Section -->
-    <section id="projects" class="py-12 sm:py-16 lg:py-20 bg-gray-900">
+    <section id="projects" class="">
         <div class="container mx-auto px-4 sm:px-6">
             <div class="text-center mb-12 sm:mb-16">
                 <h2
@@ -276,7 +276,7 @@ export const LEGACY_PAGE_MARKUP: Record<LegacyPageKey, string> = {
             </div>
 
             <!-- Second Row - Projects 5 & 6 -->
-            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 mb-8 sm:mb-12">
                 <!-- Project 5 -->
                 <div class="project-card glass-effect rounded-2xl p-4 sm:p-6 hover:shadow-2xl">
                     <div
@@ -412,7 +412,7 @@ export const LEGACY_PAGE_MARKUP: Record<LegacyPageKey, string> = {
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 py-6 sm:py-8 border-t border-gray-800">
+    <footer class="bg-gray-900 py-6 sm:py-8 border-t! border-gray-800!">
         <div class="container mx-auto px-4 sm:px-6 text-center">
             <p class="text-gray-400 text-sm sm:text-base px-2">
                 © 2025 Vibuddha Vidarshana. All rights reserved. | Built with ❤️ using Tailwind CSS and JavaScript.
@@ -421,7 +421,7 @@ export const LEGACY_PAGE_MARKUP: Record<LegacyPageKey, string> = {
     </footer>
 
     <script src="/legacy-scripts/index.js"></script>`,
-  'nexivus-pos-backend': String.raw`<!-- Navigation -->
+    'nexivus-pos-backend': String.raw`<!-- Navigation -->
     <nav class="fixed top-0 w-full z-50 glass-effect border-b border-white/20">
         <div class="container mx-auto px-4 sm:px-6 py-4">
             <div class="flex items-center justify-between">
@@ -1009,7 +1009,7 @@ export const LEGACY_PAGE_MARKUP: Record<LegacyPageKey, string> = {
     </footer>
 
     <script src="/legacy-scripts/project1.js"></script>`,
-  'nexivus-pos-frontend': String.raw`<!-- Navigation -->
+    'nexivus-pos-frontend': String.raw`<!-- Navigation -->
     <nav class="fixed top-0 w-full z-50 glass-effect border-b border-white/20">
         <div class="container mx-auto px-4 sm:px-6 py-4">
             <div class="flex items-center justify-between">
@@ -1487,7 +1487,7 @@ export const LEGACY_PAGE_MARKUP: Record<LegacyPageKey, string> = {
     </footer>
 
     <script src="/legacy-scripts/project2.js"></script>`,
-  'course-management-backend': String.raw`<!-- Navigation -->
+    'course-management-backend': String.raw`<!-- Navigation -->
     <nav class="fixed top-0 w-full z-50 glass-effect border-b border-white/20">
         <div class="container mx-auto px-4 sm:px-6 py-4">
             <div class="flex items-center justify-between">
@@ -2078,7 +2078,7 @@ export const LEGACY_PAGE_MARKUP: Record<LegacyPageKey, string> = {
     </footer>
 
     <script src="/legacy-scripts/project3.js"></script>`,
-  'course-management-frontend': String.raw`<!-- Navigation -->
+    'course-management-frontend': String.raw`<!-- Navigation -->
     <nav class="fixed top-0 w-full z-50 glass-effect border-b border-white/20">
         <div class="container mx-auto px-4 sm:px-6 py-4">
             <div class="flex items-center justify-between">
@@ -2569,7 +2569,7 @@ export const LEGACY_PAGE_MARKUP: Record<LegacyPageKey, string> = {
     </footer>
 
     <script src="/legacy-scripts/project4.js"></script>`,
-  'quiz-web-app': String.raw`<!-- Navigation -->
+    'quiz-web-app': String.raw`<!-- Navigation -->
     <nav class="fixed top-0 w-full z-50 glass-effect border-b border-white/20">
         <div class="container mx-auto px-4 sm:px-6 py-4">
             <div class="flex items-center justify-between">
@@ -3050,7 +3050,7 @@ export const LEGACY_PAGE_MARKUP: Record<LegacyPageKey, string> = {
     </footer>
 
     <script src="/legacy-scripts/project5.js"></script>`,
-  'nic-detail-extractor': String.raw`<!-- Navigation -->
+    'nic-detail-extractor': String.raw`<!-- Navigation -->
     <nav class="fixed top-0 w-full z-50 glass-effect border-b border-white/20">
         <div class="container mx-auto px-4 sm:px-6 py-4">
             <div class="flex items-center justify-between">
