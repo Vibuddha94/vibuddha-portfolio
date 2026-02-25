@@ -30,15 +30,17 @@ function setActiveNavByHash(hash) {
       // Force with inline !important because global stylesheet also uses !important heavily.
       link.style.setProperty(
         "background",
-        "rgba(242, 248, 239, 0.24)",
+        "#f2f8ef",
         "important"
       );
-      link.style.setProperty("color", "#f2f8ef", "important");
+      link.style.setProperty("color", "#1A2517", "important");
       link.style.setProperty("border-radius", "999px", "important");
       link.style.setProperty("padding-inline", "0.85rem", "important");
+      link.style.setProperty("padding-block", "0.2rem", "important");
+      link.style.setProperty("font-weight", "800", "important");
       link.style.setProperty(
         "box-shadow",
-        "inset 0 0 0 1px rgba(242, 248, 239, 0.28)",
+        "0 0 0 1px rgba(26, 37, 23, 0.2)",
         "important"
       );
     } else {
@@ -47,6 +49,8 @@ function setActiveNavByHash(hash) {
       link.style.removeProperty("color");
       link.style.removeProperty("border-radius");
       link.style.removeProperty("padding-inline");
+      link.style.removeProperty("padding-block");
+      link.style.removeProperty("font-weight");
       link.style.removeProperty("box-shadow");
     }
   });
@@ -193,7 +197,7 @@ function initializeContactForm() {
   const form = document.querySelector("form");
 
   if (form) {
-    form.addEventListener("submit", (e) => {
+    form.addEventListener("submit", async (e) => {
       e.preventDefault();
 
       // Get form data
@@ -214,42 +218,30 @@ function initializeContactForm() {
       submitBtn.textContent = "Sending...";
       submitBtn.disabled = true;
 
-      if (
-        typeof window.emailjs === "undefined" ||
-        typeof window.emailjs.send !== "function"
-      ) {
-        submitBtn.textContent = originalText;
-        submitBtn.disabled = false;
+      try {
+        const response = await fetch("/api/contact", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ name, email, message }),
+        });
+
+        if (!response.ok) {
+          throw new Error("Request failed");
+        }
+
+        showNotification("Message sent successfully!", "success");
+        form.reset();
+      } catch {
         showNotification(
-          "Email service is not available right now. Please try again shortly.",
+          "Unable to send now. Please try again in a moment.",
           "error"
         );
-        return;
+      } finally {
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
       }
-
-      emailjs
-        .send("service_kuhcvag", "template_6vnjjdi", {
-          title: "",
-          name: `${name}`,
-          from_email: `${email}`,
-          message: `${message}`,
-        })
-        .then(
-          () => {
-            submitBtn.textContent = originalText;
-            submitBtn.disabled = false;
-            showNotification("Message sent successfully!", "success");
-            form.reset();
-          },
-          (error) => {
-            submitBtn.textContent = originalText;
-            submitBtn.disabled = false;
-            showNotification(
-              "Unable to send now. Please try again in a moment.",
-              "error"
-            );
-          }
-        );
     });
   }
 }

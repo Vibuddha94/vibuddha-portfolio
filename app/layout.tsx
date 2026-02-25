@@ -19,13 +19,6 @@ export default function RootLayout({
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
         />
         <script src="https://cdn.tailwindcss.com" />
-        <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js" />
-        <script
-          dangerouslySetInnerHTML={{
-            __html:
-              'if (window.emailjs) { window.emailjs.init({ publicKey: "ImpPFCrv1ue9LqfC9" }); }',
-          }}
-        />
       </head>
       <body>{children}</body>
     </html>

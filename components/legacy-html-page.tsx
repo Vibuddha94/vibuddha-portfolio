@@ -73,27 +73,17 @@ export default function LegacyHtmlPage({ markup }: LegacyHtmlPageProps) {
             link.setAttribute("aria-current", "page");
             link.style.setProperty(
               "background",
-              "rgba(242, 248, 239, 0.24)",
+              "#f2f8ef",
               "important"
             );
-            link.style.setProperty("color", "#f2f8ef", "important");
+            link.style.setProperty("color", "#1A2517", "important");
             link.style.setProperty("border-radius", "999px", "important");
             link.style.setProperty("padding-inline", "0.85rem", "important");
+            link.style.setProperty("padding-block", "0.2rem", "important");
             link.style.setProperty("font-weight", "800", "important");
-            link.style.setProperty("text-decoration", "underline", "important");
-            link.style.setProperty(
-              "text-decoration-thickness",
-              "2px",
-              "important"
-            );
-            link.style.setProperty(
-              "text-underline-offset",
-              "4px",
-              "important"
-            );
             link.style.setProperty(
               "box-shadow",
-              "inset 0 0 0 1px rgba(242, 248, 239, 0.35), 0 0 0 1px rgba(242, 248, 239, 0.2)",
+              "0 0 0 1px rgba(26, 37, 23, 0.2)",
               "important"
             );
           } else {
@@ -102,10 +92,8 @@ export default function LegacyHtmlPage({ markup }: LegacyHtmlPageProps) {
             link.style.removeProperty("color");
             link.style.removeProperty("border-radius");
             link.style.removeProperty("padding-inline");
+            link.style.removeProperty("padding-block");
             link.style.removeProperty("font-weight");
-            link.style.removeProperty("text-decoration");
-            link.style.removeProperty("text-decoration-thickness");
-            link.style.removeProperty("text-underline-offset");
             link.style.removeProperty("box-shadow");
           }
         });
