@@ -2754,6 +2754,164 @@ a:focus {
     opacity: 1 !important;
 }
 
+/* Global Palette Migration */
+:root {
+    --theme-light: #ACC8A2;
+    --theme-dark: #1A2517;
+    --theme-dark-2: #243221;
+    --theme-light-soft: #c7ddbf;
+}
+
+html,
+body {
+    background: var(--theme-dark) !important;
+    color: var(--theme-light) !important;
+}
+
+/* Background utilities */
+.bg-white,
+.bg-gray-50,
+.bg-gray-100,
+.bg-gray-200,
+.bg-gray-800,
+.bg-gray-900,
+.bg-gray-700,
+.modern-card,
+.glass-effect,
+.code-highlight,
+.gradient-bg {
+    background: var(--theme-dark) !important;
+    color: var(--theme-light) !important;
+}
+
+.bg-white\/10,
+.bg-white\/20,
+.bg-white\/90,
+.bg-gray-900\/80,
+.bg-black\/50 {
+    background-color: color-mix(in srgb, var(--theme-dark) 82%, var(--theme-light) 18%) !important;
+}
+
+/* Text utilities */
+.text-black,
+.text-white,
+.text-gray-100,
+.text-gray-200,
+.text-gray-300,
+.text-gray-400,
+.text-gray-500,
+.text-gray-600,
+.text-gray-700,
+.text-gray-800,
+.text-gray-900,
+.text-blue-400,
+.text-green-400,
+.text-purple-400,
+.text-pink-400,
+.text-yellow-400,
+.text-orange-400,
+.text-emerald-400,
+.text-blue-200,
+.text-purple-200,
+.text-green-200 {
+    color: var(--theme-light) !important;
+}
+
+/* Border utilities */
+.border,
+.border-gray-100,
+.border-gray-200,
+.border-gray-300,
+.border-gray-400,
+.border-gray-500,
+.border-gray-600,
+.border-gray-700,
+.border-gray-800,
+.border-purple-500,
+.border-blue-500,
+.border-green-500 {
+    border-color: var(--theme-light-soft) !important;
+}
+
+/* Badge/alert/button utility backgrounds */
+.bg-blue-500,
+.bg-blue-600,
+.bg-green-500,
+.bg-green-600,
+.bg-purple-500,
+.bg-purple-600,
+.bg-pink-500,
+.bg-pink-600,
+.bg-orange-500,
+.bg-orange-600,
+.bg-yellow-500,
+.bg-yellow-600,
+.bg-red-500,
+.bg-red-600,
+.bg-indigo-500,
+.bg-indigo-600,
+.bg-teal-500,
+.bg-teal-600,
+.bg-emerald-600 {
+    background: var(--theme-dark-2) !important;
+    color: var(--theme-light) !important;
+}
+
+/* Tailwind gradient stops */
+.from-purple-400,
+.from-purple-500,
+.from-blue-500,
+.from-green-500,
+.from-pink-500,
+.from-orange-500,
+.from-yellow-500,
+.from-indigo-500,
+.from-teal-500 {
+    --tw-gradient-from: var(--theme-light) var(--tw-gradient-from-position) !important;
+    --tw-gradient-to: rgb(172 200 162 / 0) var(--tw-gradient-to-position) !important;
+    --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to) !important;
+}
+
+.via-pink-400,
+.via-pink-500,
+.via-blue-400,
+.via-blue-500,
+.via-green-400 {
+    --tw-gradient-via: color-mix(in srgb, var(--theme-light) 72%, var(--theme-dark) 28%) var(--tw-gradient-via-position) !important;
+    --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-via), var(--tw-gradient-to) !important;
+}
+
+.to-purple-400,
+.to-purple-500,
+.to-purple-600,
+.to-blue-400,
+.to-blue-500,
+.to-blue-600,
+.to-pink-400,
+.to-pink-500,
+.to-red-600,
+.to-teal-500,
+.to-emerald-600,
+.to-orange-500 {
+    --tw-gradient-to: var(--theme-dark) var(--tw-gradient-to-position) !important;
+}
+
+/* Misc visual consistency */
+button,
+a,
+.tech-badge,
+.feature-card,
+.api-endpoint {
+    color: var(--theme-light) !important;
+}
+
+input,
+textarea {
+    background: var(--theme-dark-2) !important;
+    color: var(--theme-light) !important;
+    border-color: var(--theme-light-soft) !important;
+}
+
 /* ===== public/project6.css ===== */
 body {
     font-family: "Inter", sans-serif;
@@ -3229,3 +3387,641 @@ a:focus {
     }
 }
 
+/* ==========================================================================
+   Final Theme Override: light background + dark text
+   ========================================================================== */
+:root {
+    --final-light: #ACC8A2;
+    --final-dark: #1A2517;
+    --final-surface: color-mix(in srgb, #ACC8A2 92%, #1A2517 8%);
+    --final-surface-2: color-mix(in srgb, #ACC8A2 84%, #1A2517 16%);
+    --final-border: color-mix(in srgb, #1A2517 34%, #ACC8A2 66%);
+}
+
+html,
+body {
+    background: var(--final-light) !important;
+    color: var(--final-dark) !important;
+}
+
+/* Typography defaults */
+body,
+p,
+li,
+small,
+span,
+a,
+button,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.text-black,
+.text-white,
+[class*="text-"] {
+    color: var(--final-dark) !important;
+}
+
+/* Surfaces */
+nav,
+.glass-effect,
+.modern-card,
+.code-highlight,
+.project-card,
+.feature-card,
+.tech-category,
+.api-section,
+[class*="bg-"] {
+    background: linear-gradient(150deg, var(--final-surface) 0%, var(--final-surface-2) 100%) !important;
+    border-color: var(--final-border) !important;
+}
+
+/* Navbar premium style on light theme */
+nav {
+    backdrop-filter: blur(12px) saturate(125%);
+    box-shadow: 0 10px 24px rgb(26 37 23 / 16%) !important;
+}
+
+nav a,
+.nav-item,
+.nav-link {
+    color: var(--final-dark) !important;
+}
+
+nav a:hover,
+.nav-item:hover,
+.nav-link:hover {
+    background: var(--final-dark) !important;
+    color: var(--final-light) !important;
+    border-radius: 999px;
+    padding-inline: 0.8rem;
+}
+
+/* Inputs/buttons */
+input,
+textarea,
+button,
+.btn {
+    background: var(--final-surface) !important;
+    color: var(--final-dark) !important;
+    border: 1px solid var(--final-border) !important;
+}
+
+button:hover,
+.btn:hover {
+    background: var(--final-dark) !important;
+    color: var(--final-light) !important;
+}
+
+/* ==========================================================================
+   Theme v2: Rich Modern Palette (ACC8A2 / 1A2517)
+   ========================================================================== */
+:root {
+    --brand-light: #ACC8A2;
+    --brand-dark: #1A2517;
+    --brand-dark-2: color-mix(in srgb, #1A2517 86%, #ACC8A2 14%);
+    --brand-dark-3: color-mix(in srgb, #1A2517 72%, #ACC8A2 28%);
+    --brand-soft: color-mix(in srgb, #ACC8A2 78%, #1A2517 22%);
+    --brand-muted: color-mix(in srgb, #ACC8A2 56%, #1A2517 44%);
+    --brand-border: color-mix(in srgb, #ACC8A2 42%, #1A2517 58%);
+}
+
+html,
+body {
+    background:
+        radial-gradient(1200px 620px at 10% -20%, color-mix(in srgb, #ACC8A2 20%, #1A2517 80%) 0%, transparent 55%),
+        radial-gradient(900px 540px at 95% 0%, color-mix(in srgb, #ACC8A2 14%, #1A2517 86%) 0%, transparent 60%),
+        var(--brand-dark) !important;
+    color: var(--brand-light) !important;
+}
+
+/* Surface richness */
+.bg-white,
+.bg-gray-50,
+.bg-gray-100,
+.bg-gray-200,
+.bg-gray-700,
+.bg-gray-800,
+.bg-gray-900,
+.modern-card,
+.glass-effect,
+.code-highlight,
+.gradient-bg {
+    background:
+        linear-gradient(155deg, color-mix(in srgb, #1A2517 80%, #ACC8A2 20%) 0%, color-mix(in srgb, #1A2517 92%, #ACC8A2 8%) 100%) !important;
+    color: var(--brand-light) !important;
+    border: 1px solid var(--brand-border) !important;
+    box-shadow:
+        0 14px 40px rgb(0 0 0 / 35%),
+        inset 0 1px 0 rgb(172 200 162 / 12%);
+}
+
+.project-card,
+.feature-card,
+.tech-category,
+.api-section {
+    border: 1px solid var(--brand-border) !important;
+    background:
+        linear-gradient(145deg, color-mix(in srgb, #1A2517 86%, #ACC8A2 14%) 0%, color-mix(in srgb, #1A2517 93%, #ACC8A2 7%) 100%) !important;
+    box-shadow: 0 10px 30px rgb(0 0 0 / 30%);
+}
+
+.project-card:hover,
+.feature-card:hover,
+.tech-category:hover,
+.api-section:hover {
+    transform: translateY(-8px) !important;
+    box-shadow:
+        0 22px 44px rgb(0 0 0 / 38%),
+        0 0 0 1px color-mix(in srgb, #ACC8A2 52%, #1A2517 48%) !important;
+}
+
+/* Typography */
+.text-black,
+.text-white,
+.text-gray-100,
+.text-gray-200,
+.text-gray-300,
+.text-gray-400,
+.text-gray-500,
+.text-gray-600,
+.text-gray-700,
+.text-gray-800,
+.text-gray-900,
+.text-blue-200,
+.text-blue-400,
+.text-green-200,
+.text-green-400,
+.text-purple-200,
+.text-purple-400,
+.text-pink-400,
+.text-yellow-400,
+.text-orange-400,
+.text-emerald-400 {
+    color: var(--brand-light) !important;
+}
+
+p,
+li,
+small,
+.text-sm,
+.text-base {
+    color: var(--brand-soft) !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: var(--brand-light) !important;
+    text-shadow: 0 2px 12px rgb(0 0 0 / 28%);
+}
+
+/* Rich gradient text adaptation */
+.bg-clip-text.text-transparent,
+.gradient-text {
+    background: linear-gradient(120deg, var(--brand-light) 0%, var(--brand-soft) 55%, var(--brand-muted) 100%) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+}
+
+/* Navbar redesign */
+nav {
+    position: sticky;
+    top: 0;
+    z-index: 9999;
+    backdrop-filter: blur(14px) saturate(130%);
+    background:
+        linear-gradient(180deg, color-mix(in srgb, #1A2517 76%, #ACC8A2 24%) 0%, color-mix(in srgb, #1A2517 88%, #ACC8A2 12%) 100%) !important;
+    border-bottom: 1px solid color-mix(in srgb, #ACC8A2 40%, #1A2517 60%) !important;
+    box-shadow: 0 14px 40px rgb(0 0 0 / 35%);
+}
+
+nav::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgb(172 200 162 / 55%), transparent);
+    pointer-events: none;
+}
+
+nav .container {
+    border-radius: 999px;
+    border: 1px solid color-mix(in srgb, #ACC8A2 30%, #1A2517 70%);
+    background: color-mix(in srgb, #1A2517 82%, #ACC8A2 18%);
+    box-shadow:
+        inset 0 1px 0 rgb(172 200 162 / 16%),
+        0 8px 25px rgb(0 0 0 / 26%);
+}
+
+nav a,
+.nav-item,
+.nav-link {
+    color: var(--brand-light) !important;
+    opacity: 0.96;
+}
+
+nav a:hover,
+.nav-item:hover,
+.nav-link:hover {
+    color: #1A2517 !important;
+    background: linear-gradient(130deg, var(--brand-light), color-mix(in srgb, #ACC8A2 76%, #1A2517 24%));
+    border-radius: 999px;
+    padding-inline: 0.8rem;
+}
+
+.nav-item::after,
+.nav-link::after {
+    height: 2px !important;
+    background: linear-gradient(90deg, var(--brand-light), color-mix(in srgb, #ACC8A2 58%, #1A2517 42%)) !important;
+}
+
+#mobile-menu {
+    border-top: 1px solid var(--brand-border) !important;
+    background: color-mix(in srgb, #1A2517 84%, #ACC8A2 16%) !important;
+    border-radius: 0.9rem;
+    margin-top: 0.6rem;
+    box-shadow: 0 12px 28px rgb(0 0 0 / 32%);
+}
+
+/* Buttons, pills, badges */
+button,
+.btn,
+.tech-badge,
+.tag,
+[class*="rounded-full"] {
+    border-color: var(--brand-border) !important;
+}
+
+button,
+.btn {
+    background: linear-gradient(130deg, color-mix(in srgb, #1A2517 66%, #ACC8A2 34%), color-mix(in srgb, #1A2517 84%, #ACC8A2 16%)) !important;
+    color: var(--brand-light) !important;
+    box-shadow:
+        inset 0 1px 0 rgb(172 200 162 / 20%),
+        0 8px 18px rgb(0 0 0 / 26%);
+}
+
+button:hover,
+.btn:hover {
+    background: linear-gradient(125deg, color-mix(in srgb, #ACC8A2 74%, #1A2517 26%), color-mix(in srgb, #ACC8A2 58%, #1A2517 42%)) !important;
+    color: var(--brand-dark) !important;
+}
+
+/* Inputs */
+input,
+textarea {
+    background: color-mix(in srgb, #1A2517 84%, #ACC8A2 16%) !important;
+    color: var(--brand-light) !important;
+    border: 1px solid var(--brand-border) !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: var(--brand-muted) !important;
+}
+
+input:focus,
+textarea:focus,
+button:focus,
+a:focus {
+    outline: 2px solid var(--brand-light) !important;
+    outline-offset: 2px;
+}
+
+/* Utility gradient remap */
+[class*="from-"] {
+    --tw-gradient-from: var(--brand-light) var(--tw-gradient-from-position) !important;
+    --tw-gradient-to: rgb(172 200 162 / 0) var(--tw-gradient-to-position) !important;
+    --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to) !important;
+}
+
+[class*="via-"] {
+    --tw-gradient-via: color-mix(in srgb, #ACC8A2 68%, #1A2517 32%) var(--tw-gradient-via-position) !important;
+    --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-via), var(--tw-gradient-to) !important;
+}
+
+[class*="to-"] {
+    --tw-gradient-to: color-mix(in srgb, #1A2517 86%, #ACC8A2 14%) var(--tw-gradient-to-position) !important;
+}
+
+
+/* ========================================================================== 
+   ENFORCED THEME (EOF): ACC8A2 background + 1A2517 text
+   This block is intentionally last so it wins over all legacy styles.
+   ========================================================================== */
+:root {
+  --enf-bg: #ACC8A2;
+  --enf-text: #1A2517;
+  --enf-surface: color-mix(in srgb, #ACC8A2 92%, #1A2517 8%);
+  --enf-surface-2: color-mix(in srgb, #ACC8A2 84%, #1A2517 16%);
+  --enf-border: color-mix(in srgb, #1A2517 34%, #ACC8A2 66%);
+}
+
+html body {
+  background: var(--enf-bg) !important;
+  color: var(--enf-text) !important;
+}
+
+html body,
+html body p,
+html body li,
+html body span,
+html body a,
+html body h1,
+html body h2,
+html body h3,
+html body h4,
+html body h5,
+html body h6,
+html body button,
+html body input,
+html body textarea,
+html body [class*="text-"] {
+  color: var(--enf-text) !important;
+}
+
+html body nav,
+html body .glass-effect,
+html body .modern-card,
+html body .code-highlight,
+html body .project-card,
+html body .feature-card,
+html body .tech-category,
+html body .api-section,
+html body #mobile-menu,
+html body [class*="bg-"] {
+  background: linear-gradient(150deg, var(--enf-surface) 0%, var(--enf-surface-2) 100%) !important;
+  border-color: var(--enf-border) !important;
+}
+
+html body nav {
+  box-shadow: 0 10px 24px rgb(26 37 23 / 16%) !important;
+  backdrop-filter: blur(12px) saturate(125%);
+}
+
+html body nav a:hover,
+html body .nav-item:hover,
+html body .nav-link:hover,
+html body button:hover,
+html body .btn:hover {
+  background: #1A2517 !important;
+  color: #ACC8A2 !important;
+}
+
+/* ==========================================================================
+   THEME V3 (FINAL): Modern light aesthetic
+   ========================================================================== */
+:root {
+  --m-bg: #ACC8A2;
+  --m-ink: #1A2517;
+  --m-surface: #ffffff;
+  --m-surface-2: #fcfefb;
+  --m-accent: #2a3a25;
+  --m-line: #dbe8d7;
+  --m-shadow: 0 14px 30px rgb(26 37 23 / 14%);
+}
+
+html,
+body {
+  background:
+    radial-gradient(1200px 620px at 0% -10%, #ffffff 0%, transparent 66%),
+    radial-gradient(1200px 620px at 100% 0%, #fcfefb 0%, transparent 66%),
+    var(--m-bg) !important;
+  color: var(--m-ink) !important;
+}
+
+/* Modern navbar */
+html body nav {
+  position: fixed !important;
+  top: 12px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: min(1160px, calc(100% - 1.5rem)) !important;
+  border-radius: 999px;
+  border: 1px solid var(--m-line) !important;
+  background: color-mix(in srgb, var(--m-surface) 94%, white 6%) !important;
+  box-shadow: var(--m-shadow);
+  backdrop-filter: blur(10px) saturate(120%);
+  z-index: 9999 !important;
+}
+
+html body nav .container {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Remove legacy border artifacts from older nav classes */
+html body nav.glass-effect,
+html body nav[class*="border"],
+html body nav [class*="border"] {
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
+html body nav {
+  box-shadow: var(--m-shadow) !important;
+}
+
+html body .nav-item,
+html body .nav-link,
+html body nav a {
+  color: var(--m-ink) !important;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+html body .nav-item:hover,
+html body .nav-link:hover,
+html body nav a:hover {
+  background: var(--m-accent) !important;
+  color: #eaf3e6 !important;
+  border-radius: 999px;
+  padding-inline: 0.85rem;
+}
+
+html body #mobile-menu {
+  background: var(--m-surface) !important;
+  border: 1px solid var(--m-line) !important;
+  box-shadow: 0 12px 24px rgb(26 37 23 / 12%) !important;
+}
+
+/* Modern cards/surfaces */
+html body .glass-effect,
+html body .modern-card,
+html body .project-card,
+html body .feature-card,
+html body .tech-category,
+html body .api-section,
+html body .code-highlight {
+  background: linear-gradient(155deg, #ffffff 0%, #fcfefb 100%) !important;
+  border: 1px solid var(--m-line) !important;
+  border-radius: 1.1rem !important;
+  box-shadow: var(--m-shadow) !important;
+}
+
+html body .project-card:hover,
+html body .feature-card:hover,
+html body .tech-category:hover,
+html body .api-section:hover {
+  transform: translateY(-6px) scale(1.01) !important;
+  box-shadow: 0 20px 34px rgb(26 37 23 / 18%) !important;
+}
+
+/* Hero polish */
+html body .gradient-bg {
+  background:
+    linear-gradient(135deg, #ffffff 0%, #fcfefb 65%, #f7fbf4 100%) !important;
+  border: 1px solid var(--m-line) !important;
+}
+
+html body h1,
+html body h2,
+html body h3 {
+  color: var(--m-ink) !important;
+  letter-spacing: -0.015em;
+}
+
+html body p,
+html body li,
+html body .text-sm,
+html body .text-base {
+  color: color-mix(in srgb, var(--m-ink) 78%, #52724a 22%) !important;
+}
+
+/* Buttons */
+html body button,
+html body .btn {
+  background: linear-gradient(130deg, #ffffff, #fcfefb) !important;
+  border: 1px solid var(--m-line) !important;
+  color: var(--m-ink) !important;
+  border-radius: 0.8rem !important;
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 60%),
+    0 8px 16px rgb(26 37 23 / 12%) !important;
+}
+
+html body button:hover,
+html body .btn:hover {
+  background: var(--m-accent) !important;
+  color: #edf6e8 !important;
+}
+
+/* Inputs */
+html body input,
+html body textarea {
+  background: #ffffff !important;
+  color: var(--m-ink) !important;
+  border: 1px solid var(--m-line) !important;
+  border-radius: 0.7rem !important;
+}
+
+html body input::placeholder,
+html body textarea::placeholder {
+  color: color-mix(in srgb, var(--m-ink) 45%, white 55%) !important;
+}
+
+/* ==========================================================================
+   FORCE LIGHT MODE (V4): explicit visual override
+   ========================================================================== */
+:root {
+  --v4-bg: #f2f8ef;
+  --v4-surface: #eef6ea;
+  --v4-border: #d4e5ce;
+}
+
+html body {
+  background: var(--v4-bg) !important;
+  background-image: none !important;
+  color: #1A2517 !important;
+}
+
+html body section,
+html body nav,
+html body footer,
+html body main,
+html body article,
+html body .glass-effect,
+html body .modern-card,
+html body .project-card,
+html body .feature-card,
+html body .tech-category,
+html body .api-section,
+html body .code-highlight,
+html body #mobile-menu,
+html body [class*="bg-"] {
+  background: var(--v4-surface) !important;
+  background-image: none !important;
+  color: #1A2517 !important;
+  border-color: var(--v4-border) !important;
+}
+
+/* Navbar: dark background, light text (same tone as page bg) */
+html body nav {
+  background: #1A2517 !important;
+  border-color: #2a3a25 !important;
+}
+
+html body nav *,
+html body nav a,
+html body .nav-item,
+html body .nav-link {
+  color: var(--v4-bg) !important;
+}
+
+html body nav a:hover,
+html body .nav-item:hover,
+html body .nav-link:hover {
+  background: color-mix(in srgb, #1A2517 78%, #f2f8ef 22%) !important;
+  color: var(--v4-bg) !important;
+}
+
+/* NAVBAR ENFORCED (highest-priority specificity) */
+html body nav[class],
+html body nav[class*="bg-"],
+html body nav.glass-effect,
+html body nav.fixed,
+html body nav.sticky {
+  background: #1A2517 !important;
+  background-image: none !important;
+  border: 1px solid #2a3a25 !important;
+  box-shadow: 0 12px 24px rgb(26 37 23 / 32%) !important;
+}
+
+html body nav[class] *,
+html body nav[class] a,
+html body nav[class] .nav-item,
+html body nav[class] .nav-link,
+html body nav[class] [class*="text-"] {
+  color: #f2f8ef !important;
+}
+
+html body nav[class] a:hover,
+html body nav[class] .nav-item:hover,
+html body nav[class] .nav-link:hover {
+  background: color-mix(in srgb, #1A2517 72%, #f2f8ef 28%) !important;
+  color: #f2f8ef !important;
+}
+
+html body *,
+html body [class*="text-"],
+html body a,
+html body p,
+html body h1,
+html body h2,
+html body h3,
+html body h4,
+html body h5,
+html body h6,
+html body li,
+html body span,
+html body button {
+  color: #1A2517 !important;
+}
