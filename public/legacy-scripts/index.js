@@ -5,15 +5,104 @@ function initializeSmoothScrolling() {
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     anchor.addEventListener("click", function (e) {
       e.preventDefault();
-      const target = document.querySelector(this.getAttribute("href"));
+      const targetSelector = this.getAttribute("href");
+      const target = document.querySelector(targetSelector);
       if (target) {
         target.scrollIntoView({
           behavior: "smooth",
           block: "start",
         });
+        // Keep URL hash in sync so active-nav logic remains deterministic.
+        history.replaceState(null, "", targetSelector);
       }
     });
   });
+}
+
+function setActiveNavByHash(hash) {
+  if (!hash || hash === "#") return;
+  const navLinks = document.querySelectorAll('nav a[href^="#"]');
+  navLinks.forEach((link) => {
+    const isActive = link.getAttribute("href") === hash;
+    link.classList.toggle("is-active", isActive);
+    if (isActive) {
+      link.setAttribute("aria-current", "page");
+      // Force with inline !important because global stylesheet also uses !important heavily.
+      link.style.setProperty(
+        "background",
+        "rgba(242, 248, 239, 0.24)",
+        "important"
+      );
+      link.style.setProperty("color", "#f2f8ef", "important");
+      link.style.setProperty("border-radius", "999px", "important");
+      link.style.setProperty("padding-inline", "0.85rem", "important");
+      link.style.setProperty(
+        "box-shadow",
+        "inset 0 0 0 1px rgba(242, 248, 239, 0.28)",
+        "important"
+      );
+    } else {
+      link.removeAttribute("aria-current");
+      link.style.removeProperty("background");
+      link.style.removeProperty("color");
+      link.style.removeProperty("border-radius");
+      link.style.removeProperty("padding-inline");
+      link.style.removeProperty("box-shadow");
+    }
+  });
+}
+
+function initializeActiveNavState() {
+  const sectionLinks = Array.from(
+    document.querySelectorAll('nav a[href^="#"]')
+  );
+  if (sectionLinks.length === 0) return;
+
+  const sections = sectionLinks
+    .map((link) => {
+      const hash = link.getAttribute("href");
+      const section = hash ? document.querySelector(hash) : null;
+      return section ? { hash, section } : null;
+    })
+    .filter(Boolean);
+
+  const applySectionByScrollPosition = () => {
+    const nav = document.querySelector("nav");
+    const navHeight = nav ? nav.getBoundingClientRect().height : 80;
+    const scrollMarker = window.scrollY + navHeight + 24;
+
+    let activeHash = sectionLinks[0].getAttribute("href");
+    sections.forEach(({ hash, section }) => {
+      if (scrollMarker >= section.offsetTop) {
+        activeHash = hash;
+      }
+    });
+
+    if (activeHash) {
+      setActiveNavByHash(activeHash);
+    }
+  };
+
+  sectionLinks.forEach((link) => {
+    link.addEventListener("click", () => {
+      const hash = link.getAttribute("href");
+      if (hash) {
+        setActiveNavByHash(hash);
+      }
+    });
+  });
+
+  window.addEventListener("hashchange", () => {
+    setActiveNavByHash(window.location.hash);
+  });
+
+  window.addEventListener("scroll", throttle(applySectionByScrollPosition, 100));
+
+  if (window.location.hash) {
+    setActiveNavByHash(window.location.hash);
+  } else {
+    applySectionByScrollPosition();
+  }
 }
 
 // Intersection Observer for scroll-triggered animations
@@ -68,14 +157,13 @@ function throttle(func, limit) {
 // Mobile menu toggle
 function initializeMobileMenu() {
   const mobileMenuBtn = document.querySelector(".md\\:hidden");
-  let mobileMenuOpen = false;
 
   if (mobileMenuBtn) {
     mobileMenuBtn.addEventListener("click", () => {
-      mobileMenuOpen = !mobileMenuOpen;
       const mobileMenu = document.getElementById("mobile-menu");
+      const isHidden = mobileMenu.classList.contains("hidden");
 
-      if (mobileMenuOpen) {
+      if (isHidden) {
         // Toggle mobile menu visibility
         mobileMenu.classList.remove("hidden");
         mobileMenuBtn.innerHTML = "✕";
@@ -96,7 +184,6 @@ function initializeMobileMenuLinks() {
       mobileMenu.classList.add("hidden");
       const mobileMenuBtn = document.querySelector(".md\\:hidden");
       mobileMenuBtn.innerHTML = "☰";
-      // Mobile menu state is automatically reset when hidden
     });
   });
 }
@@ -223,6 +310,7 @@ function initializeProjectCards() {
 // Initialize everything when DOM is loaded
 document.addEventListener("DOMContentLoaded", () => {
   initializeSmoothScrolling();
+  initializeActiveNavState();
   initializeMobileMenuLinks();
   initializeAnimations();
   initializeMobileMenu();

@@ -35,5 +35,9 @@ export default async function ProjectRoutePage({ params }: Props) {
     notFound();
   }
 
-  return <LegacyHtmlPage markup={getProjectMarkup(slug as ProjectSlug)} />;
+  return (
+    <div className="page-project">
+      <LegacyHtmlPage markup={getProjectMarkup(slug as ProjectSlug)} />
+    </div>
+  );
 }

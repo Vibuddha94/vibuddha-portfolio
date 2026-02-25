@@ -14,6 +14,7 @@ export default function LegacyHtmlPage({ markup }: LegacyHtmlPageProps) {
     if (!container) return;
 
     let cancelled = false;
+    const cleanups: Array<() => void> = [];
 
     const runLegacyPage = async () => {
       const template = document.createElement("template");
@@ -55,12 +56,108 @@ export default function LegacyHtmlPage({ markup }: LegacyHtmlPageProps) {
       }
 
       document.dispatchEvent(new Event("DOMContentLoaded", { bubbles: true }));
+
+      const navLinks = Array.from(
+        document.querySelectorAll("nav a[href]")
+      ) as HTMLAnchorElement[];
+
+      if (navLinks.length === 0) return;
+
+      const setActiveLink = (activeLink: HTMLAnchorElement | null) => {
+        navLinks.forEach((link) => {
+          const isActive = link === activeLink;
+          link.classList.toggle("is-active", isActive);
+          if (isActive) {
+            link.setAttribute("aria-current", "page");
+          } else {
+            link.removeAttribute("aria-current");
+          }
+        });
+      };
+
+      const hashLinks = navLinks.filter((link) => {
+        const href = link.getAttribute("href");
+        return !!href && href.startsWith("#") && href.length > 1;
+      });
+
+      const routeLinks = navLinks.filter((link) => {
+        const href = link.getAttribute("href");
+        return !!href && !href.startsWith("#");
+      });
+
+      const pathname = window.location.pathname;
+      const matchedRouteLink =
+        routeLinks.find((link) => {
+          try {
+            const url = new URL(link.href, window.location.origin);
+            return url.pathname === pathname;
+          } catch {
+            return false;
+          }
+        }) ?? null;
+
+      if (matchedRouteLink) {
+        setActiveLink(matchedRouteLink);
+      }
+
+      if (hashLinks.length > 0) {
+        const sectionElements = hashLinks
+          .map((link) => {
+            const hash = link.getAttribute("href") as string;
+            const id = hash.slice(1);
+            const section = document.getElementById(id);
+            return section ? { link, section } : null;
+          })
+          .filter((item): item is { link: HTMLAnchorElement; section: HTMLElement } => !!item);
+
+        if (sectionElements.length > 0) {
+          const updateFromHash = () => {
+            const currentHash = window.location.hash;
+            const activeFromHash =
+              sectionElements.find(({ link }) => link.getAttribute("href") === currentHash)
+                ?.link ?? null;
+            if (activeFromHash) {
+              setActiveLink(activeFromHash);
+            }
+          };
+
+          const observer = new IntersectionObserver(
+            (entries) => {
+              const visible = entries
+                .filter((entry) => entry.isIntersecting)
+                .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+              if (!visible) return;
+
+              const matched = sectionElements.find(
+                ({ section }) => section === visible.target
+              );
+              if (matched) {
+                setActiveLink(matched.link);
+              }
+            },
+            {
+              rootMargin: "-25% 0px -60% 0px",
+              threshold: [0.2, 0.4, 0.6],
+            }
+          );
+
+          sectionElements.forEach(({ section }) => observer.observe(section));
+          updateFromHash();
+          window.addEventListener("hashchange", updateFromHash);
+          cleanups.push(() => {
+            observer.disconnect();
+            window.removeEventListener("hashchange", updateFromHash);
+          });
+        }
+      }
     };
 
     runLegacyPage();
 
     return () => {
       cancelled = true;
+      cleanups.forEach((cleanup) => cleanup());
     };
   }, [markup]);
 

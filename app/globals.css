@@ -4010,6 +4010,32 @@ html body nav[class] .nav-link:hover {
   color: #f2f8ef !important;
 }
 
+/* Home-only cleanups */
+.page-home {
+  overflow-x: hidden !important;
+}
+
+/* Remove section splitter artifacts on home page */
+.page-home section,
+.page-home footer {
+  border-top: 0 !important;
+  border-bottom: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Remove right-side hero gap/line artifact */
+.page-home #home {
+  overflow: hidden !important;
+}
+
+.page-home #home > .absolute,
+.page-home #home .animate-gradient {
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
 html body *,
 html body [class*="text-"],
 html body a,
@@ -4024,4 +4050,135 @@ html body li,
 html body span,
 html body button {
   color: #1A2517 !important;
+}
+
+/* Home hero button polish (override global hover conflicts) */
+.page-home #home button {
+  background: linear-gradient(135deg, #1A2517 0%, #2a3a25 100%) !important;
+  color: #f2f8ef !important;
+  border: 1px solid #1A2517 !important;
+  border-radius: 999px !important;
+  box-shadow: 0 8px 18px rgb(26 37 23 / 22%) !important;
+  transform: none !important;
+  transition: transform 180ms ease, background-color 180ms ease, color 180ms ease, box-shadow 180ms ease !important;
+}
+
+.page-home #home button:hover {
+  background: linear-gradient(135deg, #2a3a25 0%, #3a5232 100%) !important;
+  color: #f2f8ef !important;
+  box-shadow: 0 12px 24px rgb(26 37 23 / 28%) !important;
+  transform: translateY(-1px) !important;
+}
+
+/* Home mobile nav fix */
+.page-home nav a,
+.page-home nav .nav-item,
+.page-home nav .nav-link,
+.page-home nav [class*="text-"] {
+  color: #f2f8ef !important;
+}
+
+.page-home nav #mobile-menu-btn,
+.page-home nav .md\:hidden {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: #f2f8ef !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+.page-home #mobile-menu {
+  max-height: none !important;
+  overflow: visible !important;
+  background: #1A2517 !important;
+  border: 1px solid #2a3a25 !important;
+  border-radius: 0.75rem !important;
+}
+
+.page-home #mobile-menu.hidden {
+  display: none !important;
+}
+
+.page-home #mobile-menu:not(.hidden) {
+  display: block !important;
+}
+
+.page-home #mobile-menu a {
+  color: #f2f8ef !important;
+}
+
+/* Active nav link state */
+html body nav a.is-active,
+html body nav a[aria-current="page"],
+html body nav .nav-item.is-active,
+html body nav .nav-link.is-active {
+  background: color-mix(in srgb, #1A2517 70%, #f2f8ef 30%) !important;
+  color: #f2f8ef !important;
+  border-radius: 999px !important;
+  padding-inline: 0.8rem !important;
+  box-shadow: inset 0 0 0 1px rgb(242 248 239 / 20%) !important;
+}
+
+/* Prevent mobile menu clipping by rounded/fixed navbar container */
+.page-home nav,
+.page-home nav.glass-effect {
+  overflow: visible !important;
+  position: fixed !important;
+}
+
+.page-home nav .container {
+  overflow: visible !important;
+  position: relative !important;
+}
+
+@media (max-width: 768px) {
+  .page-home nav {
+    border-radius: 0.9rem !important;
+  }
+
+  .page-home #mobile-menu {
+    position: absolute !important;
+    top: calc(100% + 0.5rem) !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 10000 !important;
+    padding: 0.6rem 0.75rem !important;
+    border-radius: 0.85rem !important;
+    box-shadow: 0 14px 28px rgb(26 37 23 / 28%) !important;
+  }
+}
+
+/* Ensure mobile menu toggle is hidden on desktop */
+@media (min-width: 769px) {
+  .page-home nav #mobile-menu-btn,
+  .page-home nav .md\:hidden {
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
+}
+
+/* Keep hover style persisted for active section/page nav links */
+html body nav a.is-active,
+html body nav a[aria-current="page"],
+html body nav .nav-item.is-active,
+html body nav .nav-link.is-active,
+html body nav[class] a.is-active,
+html body nav[class] a[aria-current="page"],
+html body nav[class] .nav-item.is-active,
+html body nav[class] .nav-link.is-active {
+  background: color-mix(in srgb, #1A2517 72%, #f2f8ef 28%) !important;
+  color: #f2f8ef !important;
+  border-radius: 999px !important;
+  padding-inline: 0.85rem !important;
+  box-shadow: inset 0 0 0 1px rgb(242 248 239 / 24%) !important;
+}
+
+html body nav a.is-active::after,
+html body nav a[aria-current="page"]::after,
+html body nav .nav-item.is-active::after,
+html body nav .nav-link.is-active::after {
+  width: 100% !important;
 }

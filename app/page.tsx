@@ -8,5 +8,9 @@ export const metadata: Metadata = {
 };
 
 export default function HomePage() {
-  return <LegacyHtmlPage markup={getHomeMarkup()} />;
+  return (
+    <div className="page-home">
+      <LegacyHtmlPage markup={getHomeMarkup()} />
+    </div>
+  );
 }
