@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { SpeedInsights } from '@vercel/speed-insights/next';
+import { Analytics } from '@vercel/analytics/next';
 
 export const metadata: Metadata = {
   title: "Vibuddha Vidarshana | Portfolio",
@@ -20,7 +22,11 @@ export default function RootLayout({
         />
         <script src="https://cdn.tailwindcss.com" />
       </head>
-      <body>{children}</body>
+      <body>
+        {children}
+        <SpeedInsights />
+        <Analytics />
+      </body>
     </html>
   );
 }
