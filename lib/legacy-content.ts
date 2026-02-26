@@ -53,7 +53,7 @@ export const LEGACY_PAGE_MARKUP: Record<LegacyPageKey, string> = {
             <div class="animate-fade-in-up">
                 <h1
                     class="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent leading-tight">
-                    Vibuddha Vidarshana
+                    Vibuddha 
                 </h1>
                 <p class="text-lg sm:text-xl md:text-2xl mb-6 sm:mb-8 text-gray-300 animate-slide-in-left"
                     style="animation-delay: 0.2s;">
