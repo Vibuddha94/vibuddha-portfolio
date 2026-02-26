@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: "Vibuddha Vidarshana | Portfolio",
   description:
     "Portfolio of Vibuddha Vidarshana, full-stack developer focused on modern web applications.",
-  metadataBase: new URL("https://vibuddha.me"),
+  metadataBase: new URL("https://www.vibuddha.me"),
 };
 
 export default function RootLayout({
